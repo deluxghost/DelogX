@@ -3,7 +3,7 @@
 <article>
     <h1 class="page-title"><a href="{{ page['url'].decode('utf-8') }}">{{ page['title'].decode('utf-8') }}</a></h1>
     <div class="page-content">
-        {{ page['content'].decode('utf-8') }}
+        {{ page['content'].decode('utf-8')|safe }}
     </div>
 </article>
 {%- endblock %}

@@ -66,7 +66,7 @@ class DelogXAPI():
             post_info = {
                 'url': self._post_url + post['url'],
                 'title': post['title'],
-                'time': post['mtime'],
+                'time': post['time'],
                 'content': self._get_file(post_filename, post['title'])
             }
             if not post['title']:
@@ -117,7 +117,7 @@ class DelogXAPI():
             if error:
                 return None
             else:
-                return ''.join(lines) 
+                return self.markdown_parser(''.join(lines))
         else:
             return None
 
@@ -157,14 +157,13 @@ class DelogXAPI():
         if not os.path.exists(self._post_dir):
             raise DelogXError(self._post_url + ' Not Found')
         def _get_sort_key(post):
-            return post['ctime']
+            return post['time']
         for filename in os.listdir(self._post_dir):
             if os.path.isfile(self._post_dir + filename) and os.path.splitext(filename)[1] == '.md':
                 post_meta = {
                     'url': os.path.splitext(filename)[0],
                     'title': self.get_post_title(filename),
-                    'ctime': os.path.getctime(self._post_dir + filename),
-                    'mtime': os.path.getmtime(self._post_dir + filename),
+                    'time': os.path.getmtime(self._post_dir + filename),
                     'hidden': False
                 }
                 if filename.startswith('.'):
@@ -219,5 +218,16 @@ class DelogXAPI():
                 continue
         self.global_pages = sorted(self.global_pages, cmp=_sort_compare)
     
-    def markdown_parser():
-        pass
+    def markdown_parser(self, input_md):
+        try:
+            import markdown
+            from markdown.extensions.headerid import HeaderIdExtension
+        except ImportError:
+            raise DelogXError('Import markdown Failed')
+        return markdown.markdown(input_md.decode('utf-8'),
+            output_format='html5',
+            extensions=[
+                'markdown.extensions.attr_list',
+                'markdown.extensions.tables',
+                HeaderIdExtension(forceid=False)
+            ]).encode('utf-8')
