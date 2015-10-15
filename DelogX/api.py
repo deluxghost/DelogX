@@ -226,6 +226,7 @@ class DelogXAPI():
             raise DelogXError('Import markdown Failed')
         return markdown.markdown(input_md.decode('utf-8'),
             output_format='html5',
+            tab_length=4,
             extensions=[
                 'markdown.extensions.attr_list',
                 'markdown.extensions.tables',
