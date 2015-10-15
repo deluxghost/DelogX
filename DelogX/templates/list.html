@@ -1,0 +1,24 @@
+{%- extends "layout.html" %}
+{%- block body %}
+{%- if post_list %}
+{%- for post in post_list %}
+{%- if post %}
+<article>
+    <h1 class="post-title"><a href="{{ post['url'].decode('utf-8') }}">{{ post['title'].decode('utf-8') }}</a></h1>
+    <span class="post-time">{{ post['time'].decode('utf-8') }}</span>
+    <div class="post-content">
+        {{ post['content'].decode('utf-8') }}
+    </div>
+</article>
+{%- endif %}
+{%- endfor %}
+{%- else %}
+<div class="empty-post">No Post</div>
+{%- endif %}
+{%- if prev_page %}
+<span class="prev-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid-1 }}">Prev</a></span>
+{%- endif %}
+{%- if next_page %}
+<span class="next-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid+1 }}">Next</a></span>
+{%- endif %}
+{%- endblock %}

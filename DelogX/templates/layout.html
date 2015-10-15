@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {%- if post %}
+    <title>{{ post['title'].decode('utf-8') }} - {{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    {%- elif page %}
+    <title>{{ page['title'].decode('utf-8') }} - {{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    {%- else %}
+    <title>{{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    {%- endif %}
+    {%- for css in site_config['CSS_LIST'] %}
+    <link rel="stylesheet" type="text/css" href="/static/{{ css.decode('utf-8') }}">
+    {%- endfor %}
+    {%- for js in site_config['JS_LIST'] %}
+    <script type="text/javascript" src="/static/{{ js.decode('utf-8') }}"></script>
+    {%- endfor %}
+</head>
+<body>
+{% include 'header.html' %}
+    {%- block body %}
+    {%- endblock %}
+{% include 'footer.html' %}
+</body>
+</html>

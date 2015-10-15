@@ -1,0 +1,10 @@
+{%- extends "layout.html" %}
+{%- block body %}
+<article>
+    <h1 class="post-title"><a href="{{ post['url'].decode('utf-8') }}">{{ post['title'].decode('utf-8') }}</a></h1>
+    <span class="post-time">{{ post['time'].decode('utf-8') }}</span>
+    <div class="post-content">
+        {{ post['content'].decode('utf-8') }}
+    </div>
+</article>
+{%- endblock %}

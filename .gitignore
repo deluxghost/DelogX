@@ -1,0 +1,6 @@
+*.py[cod]
+
+.vscode/
+
+pages/*.md
+posts/*.md
