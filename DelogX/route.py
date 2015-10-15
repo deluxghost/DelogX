@@ -56,7 +56,7 @@ def pages(pageid):
     else:
         abort(404)
 
-#del
+#delete
 @app.route('/u/')
 def u():
     api.update_list()
