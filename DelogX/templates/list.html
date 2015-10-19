@@ -13,12 +13,12 @@
 {%- endif %}
 {%- endfor %}
 {%- else %}
-<div class="empty-post">No Post</div>
+<div class="empty-post">{{ _('No Post Here') }}</div>
 {%- endif %}
 {%- if prev_page %}
-<span class="prev-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid-1 }}">Prev</a></span>
+<span class="prev-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid-1 }}">{{ _('Previous Page') }}</a></span>
 {%- endif %}
 {%- if next_page %}
-<span class="next-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid+1 }}">Next</a></span>
+<span class="next-page"><a href="{{ site_config['POST_LIST_URL'] }}{{ pid+1 }}">{{ _('Next Page') }}</a></span>
 {%- endif %}
 {%- endblock %}

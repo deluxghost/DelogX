@@ -10,6 +10,7 @@ except ImportError:
     raise DelogXError('Import pyinotify Failed')
 try:
     from flask import Flask
+    from flask.ext.babel import Babel
 except ImportError:
     raise DelogXError('Import Flask Failed')
 
@@ -22,6 +23,7 @@ wm.add_watch(config.site_info['PAGE_DIR'], mask, rec=True)
 notifier.start()
 
 app = Flask(__name__)
+babel = Babel(app)
 api = DelogXAPI(config.site_info)
 
 from DelogX import route

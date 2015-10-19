@@ -1,6 +1,6 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from flask import Flask, render_template, abort
-from DelogX import app, api, config
+from DelogX import app, babel, api, config
 
 @app.route('/')
 def index():
@@ -66,3 +66,7 @@ def u():
 def not_found(error):
     return render_template('404.html',
         site_config=config.site_info, header=api.get_header())
+
+@babel.localeselector
+def get_locale():
+    return config.site_info['LOCALE']
