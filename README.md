@@ -1,4 +1,4 @@
 # DelogX
 A blog system, written in Python
 
-(In progress...)
+(Still in progress... don't fork now)
