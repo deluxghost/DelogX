@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-from DelogX import config
 from DelogX.error import DelogXError
-from DelogX.api import DelogXAPI
-from DelogX.inotify import FileEventHandler
 
 try:
     import pyinotify
@@ -13,6 +10,10 @@ try:
     from flask.ext.babel import Babel
 except ImportError:
     raise DelogXError('Import Flask Failed')
+
+from DelogX import config
+from DelogX.api import DelogXAPI
+from DelogX.inotify import FileEventHandler
 
 wm = pyinotify.WatchManager()
 mask = pyinotify.ALL_EVENTS
