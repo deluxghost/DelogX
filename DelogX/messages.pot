@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 08:35+0800\n"
+"POT-Creation-Date: 2015-10-20 16:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 #: templates/footer.html:2
 #, python-format
 msgid "Powered by %(project)s"
+msgstr ""
+
+#: templates/header.html:7
+msgid "Homepage"
 msgstr ""
 
 #: templates/list.html:16

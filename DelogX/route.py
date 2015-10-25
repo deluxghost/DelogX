@@ -56,12 +56,6 @@ def pages(pageid):
     else:
         abort(404)
 
-#delete
-@app.route('/u/')
-def u():
-    api.update_list()
-    return repr(api.global_pages) + "<br>" + repr(api.global_posts)+'<br>'
-
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html',

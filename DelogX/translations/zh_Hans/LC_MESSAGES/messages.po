@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-19 08:35+0800\n"
+"POT-Creation-Date: 2015-10-20 16:25+0800\n"
 "PO-Revision-Date: 2015-10-19 09:36+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans\n"
@@ -26,6 +26,10 @@ msgstr "HTTP 404: 页面未找到"
 #, python-format
 msgid "Powered by %(project)s"
 msgstr "由 %(project)s 强力驱动"
+
+#: templates/header.html:7
+msgid "Homepage"
+msgstr "首页"
 
 #: templates/list.html:16
 msgid "No Post Here"

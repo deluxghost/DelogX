@@ -19,6 +19,8 @@ class DelogXAPI():
             self._post_url = site_info['POST_URL']
             self._page_url = site_info['PAGE_URL']
             self._page_size = site_info['PAGE_SIZE']
+            if self._page_size <= 0:
+                self._page_size = 10
         self.update_list()
 
     def get_header(self):
@@ -107,7 +109,9 @@ class DelogXAPI():
             f = open(filename)
             try:
                 lines = f.readlines()
-                if title:
+                if title and title.endswith('\n'):
+                    lines = lines[2:]
+                elif title:
                     lines = lines[1:]
             except:
                 lines = []
@@ -131,18 +135,24 @@ class DelogXAPI():
         import os
         import re
         if os.path.isfile(filename):
-            pattern = re.compile(r'^#\s*([^#]+)$')
+            pattern1 = re.compile(r'^#\s*([^#]+)\s*#*$')
+            pattern2 = re.compile(r'^\s*=+\s*$')
             f = open(filename)
             try:
-                line = f.readline().strip('\n')
+                line1 = f.readline().strip('\n').strip('\r')
+                line2 = f.readline().strip('\n').strip('\r')
             except:
-                line = ''
+                line1 = ''
+                line2 = ''
             finally:
                 f.close()
-            match = pattern.match(line)
-            if match and match.group(1):
-                return match.group(1)
+            match1 = pattern1.match(line1)
+            if match1 and match1.group(1):
+                return match1.group(1)
             else:
+                match2 = pattern2.match(line2)
+                if match2 and line1.strip():
+                    return line1 + '\n'
                 return None
         else:
             return None
@@ -221,14 +231,22 @@ class DelogXAPI():
     def markdown_parser(self, input_md):
         try:
             import markdown
-            from markdown.extensions.headerid import HeaderIdExtension
         except ImportError:
             raise DelogXError('Import markdown Failed')
+        from markdown.extensions.headerid import HeaderIdExtension
+        from markdown.extensions.fenced_code import FencedCodeExtension, FencedBlockPreprocessor
+        class CodeExt(FencedCodeExtension):
+            def extendMarkdown(self, md, md_globals):
+                md.registerExtension(self)
+                md.preprocessors.add('fenced_code_block', CodeExtPreprocesser(md), ">normalize_whitespace")
+        class CodeExtPreprocesser(FencedBlockPreprocessor):
+            LANG_TAG = ' class="language-%s"'
         return markdown.markdown(input_md.decode('utf-8'),
             output_format='html5',
             tab_length=4,
             extensions=[
                 'markdown.extensions.attr_list',
                 'markdown.extensions.tables',
-                HeaderIdExtension(forceid=False)
+                HeaderIdExtension(forceid=False),
+                CodeExt()
             ]).encode('utf-8')

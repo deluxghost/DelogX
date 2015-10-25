@@ -22,7 +22,7 @@ wm.add_watch(config.site_info['POST_DIR'], mask, rec=True)
 wm.add_watch(config.site_info['PAGE_DIR'], mask, rec=True)
 notifier.start()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 babel = Babel(app)
 api = DelogXAPI(config.site_info)
 
