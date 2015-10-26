@@ -2,9 +2,9 @@
 from DelogX.error import DelogXError
 
 try:
-    import pyinotify
+    from watchdog.observers import Observer
 except ImportError:
-    raise DelogXError('Import pyinotify Failed')
+    raise DelogXError('Import watchdog Failed')
 try:
     from flask import Flask
     from flask.ext.babel import Babel
@@ -13,15 +13,13 @@ except ImportError:
 
 from DelogX import config
 from DelogX.api import DelogXAPI
-from DelogX.inotify import FileEventHandler
+from DelogX.watch import BlogHandler
 
-wm = pyinotify.WatchManager()
-mask = pyinotify.ALL_EVENTS
-notifier = pyinotify.ThreadedNotifier(wm, FileEventHandler())
-notifier.setDaemon(True)
-wm.add_watch(config.site_info['POST_DIR'], mask, rec=True)
-wm.add_watch(config.site_info['PAGE_DIR'], mask, rec=True)
-notifier.start()
+observer = Observer()
+observer.setDaemon(True)
+observer.schedule(BlogHandler(patterns=['*.md']), config.site_info['POST_DIR'])
+observer.schedule(BlogHandler(patterns=['*.md']), config.site_info['PAGE_DIR'])
+observer.start()
 
 app = Flask(__name__, static_url_path='/static')
 babel = Babel(app)

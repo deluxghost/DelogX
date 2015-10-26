@@ -10,8 +10,8 @@ site_info = {
         '/static/highlight.js',
         '/static/highlight.init.js'
     ],
-    'POST_DIR': '/home/ghost/DelogX/posts/',
-    'PAGE_DIR': '/home/ghost/DelogX/pages/',
+    'POST_DIR': 'posts/',
+    'PAGE_DIR': 'pages/',
     'POST_URL': '/posts/',
     'PAGE_URL': '/pages/',
     'POST_LIST_URL': '/n/',
