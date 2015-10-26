@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from DelogX.error import DelogXError
 
 try:
