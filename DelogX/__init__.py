@@ -15,6 +15,11 @@ from DelogX import config
 from DelogX.api import DelogXAPI
 from DelogX.watch import BlogHandler
 
+if not os.path.exists(config.site_info['POST_DIR']):
+    raise DelogXError(config.site_info['POST_DIR'] + ' Not Found')
+if not os.path.exists(config.site_info['PAGE_DIR']):
+    raise DelogXError(config.site_info['PAGE_DIR'] + ' Not Found')
+
 observer = Observer()
 observer.setDaemon(True)
 observer.schedule(BlogHandler(patterns=['*.md']), config.site_info['POST_DIR'])
