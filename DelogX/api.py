@@ -234,13 +234,13 @@ class DelogXAPI():
         except ImportError:
             raise DelogXError('Import markdown Failed')
         from markdown.extensions.headerid import HeaderIdExtension
-        from markdown.extensions.fenced_code import FencedCodeExtension, FencedBlockPreprocessor
-        class CodeExt(FencedCodeExtension):
-            def extendMarkdown(self, md, md_globals):
-                md.registerExtension(self)
-                md.preprocessors.add('fenced_code_block', CodeExtPreprocesser(md), ">normalize_whitespace")
-        class CodeExtPreprocesser(FencedBlockPreprocessor):
-            LANG_TAG = ' class="language-%s"'
+        #from markdown.extensions.fenced_code import FencedCodeExtension, FencedBlockPreprocessor
+        #class CodeExt(FencedCodeExtension):
+            #def extendMarkdown(self, md, md_globals):
+                #md.registerExtension(self)
+                #md.preprocessors.add('fenced_code_block', CodeExtPreprocesser(md), ">normalize_whitespace")
+        #class CodeExtPreprocesser(FencedBlockPreprocessor):
+            #LANG_TAG = ' class="language-%s"'
         return markdown.markdown(input_md.decode('utf-8'),
             output_format='html5',
             tab_length=4,
@@ -248,5 +248,5 @@ class DelogXAPI():
                 'markdown.extensions.attr_list',
                 'markdown.extensions.tables',
                 HeaderIdExtension(forceid=False),
-                CodeExt()
+                'markdown.extensions.fenced_code'
             ]).encode('utf-8')
