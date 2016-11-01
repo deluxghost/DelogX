@@ -3,8 +3,8 @@ from DelogX.error import DelogXError
 
 class DelogXAPI():
 
-    global_posts = []
-    global_pages = []
+    global_posts = [] # format: [{'url': 'url', 'hidden': False, 'time': time, 'title': 'title'}, ...]
+    global_pages = [] # format: [{'url': 'url', 'sort': 0, 'hidden': False, 'title': 'title'}, ...]
     
     _post_dir = './posts/'
     _page_dir = './pages/'
@@ -135,7 +135,7 @@ class DelogXAPI():
         import os
         import re
         if os.path.isfile(filename):
-            pattern1 = re.compile(r'^#\s*([^#]+)\s*#*$')
+            pattern1 = re.compile(r'^\s*#\s*([^#]+)\s*#*\s*$')
             pattern2 = re.compile(r'^\s*=+\s*$')
             f = open(filename)
             try:
@@ -208,6 +208,23 @@ class DelogXAPI():
                     return 1
                 else:
                     return -1
+        def _cmp_to_key(orig_cmp):
+            class C(object):
+                def __init__(self, obj, *args):
+                    self.obj = obj
+                def __lt__(self, other):
+                    return orig_cmp(self.obj, other.obj) < 0
+                def __gt__(self, other):
+                    return orig_cmp(self.obj, other.obj) > 0
+                def __eq__(self, other):
+                    return orig_cmp(self.obj, other.obj) == 0
+                def __le__(self, other):
+                    return orig_cmp(self.obj, other.obj) <= 0  
+                def __ge__(self, other):
+                    return orig_cmp(self.obj, other.obj) >= 0
+                def __ne__(self, other):
+                    return orig_cmp(self.obj, other.obj) != 0
+            return C
         for filename in os.listdir(self._page_dir):
             if os.path.isfile(self._page_dir + filename) and os.path.splitext(filename)[1] == '.md':
                 page_meta = {
@@ -226,7 +243,7 @@ class DelogXAPI():
                 self.global_pages.append(page_meta)
             else:
                 continue
-        self.global_pages = sorted(self.global_pages, cmp=_sort_compare)
+        self.global_pages = sorted(self.global_pages, key=_cmp_to_key(_sort_compare))
     
     def markdown_parser(self, input_md):
         try:

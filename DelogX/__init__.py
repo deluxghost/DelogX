@@ -8,11 +8,11 @@ except ImportError:
     raise DelogXError('Import watchdog Failed')
 try:
     from flask import Flask
-    from flask.ext.babel import Babel
+    from flask_babel import Babel
 except ImportError:
     raise DelogXError('Import Flask Failed')
 
-from DelogX import config
+from DelogX.config import DelogXConfig as config
 from DelogX.api import DelogXAPI
 from DelogX.watch import BlogHandler
 

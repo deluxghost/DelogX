@@ -110,7 +110,7 @@
 
 图片与链接的语法非常接近。
 
-![Wikipedia](https://upload.wikimedia.org/wikipedia/zh/6/62/Wiki_zh-hans.png 一张图片)
+![Wikipedia](https://upload.wikimedia.org/wikipedia/zh/6/62/Wiki_zh-hans.png "一张图片")
 
 ## 水平线
 

@@ -7,7 +7,6 @@
 DelogX 的主要配置文件是 `DelogX/config.py` 文件：
 
 ```python
-# -*- coding: utf-8 -*-
 site_info = { # 站点设置
     'SITE_NAME': 'DelogX', # 站点的名称
     'SITE_SUBNAME': 'Another Markdown Blog', # 站点的副名称
@@ -19,8 +18,8 @@ site_info = { # 站点设置
         '/static/highlight.js',
         '/static/highlight.init.js'
     ],
-    'POST_DIR': 'posts/', # 文章文件的存储目录
-    'PAGE_DIR': 'pages/', # 页面文件的存储目录
+    'POST_DIR': '/path/to/your/blog/posts/', # 文章文件的存储目录
+    'PAGE_DIR': '/path/to/your/blog/pages/', # 页面文件的存储目录
     'POST_URL': '/posts/', # 文章的 URL 前缀
     'PAGE_URL': '/pages/', # 页面的 URL 前缀
     'POST_LIST_URL': '/n/', # 文章列表的 URL 前缀
@@ -180,7 +179,7 @@ print("Hello Python3!")
 ### 图片
 
 ```markdown
-![Wikipedia](/static/images/photo.png 一张图片)
+![Wikipedia](/static/images/photo.png "一张图片")
 ```
 
 ### 水平线
