@@ -12,9 +12,9 @@ Ensure you have installed pip.
 git clone https://github.com/deluxghost/DelogX.git
 ```
 
-Then modify your `DelogX/config.py`.
+You can config `DelogX/config.py`.
 
-And install requirements.
+Then install requirements.
 
 ```shell
 cd DelogX
