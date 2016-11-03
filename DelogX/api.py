@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from DelogX.error import DelogXError
 
 class DelogXAPI():
@@ -103,10 +105,10 @@ class DelogXAPI():
             return None
     
     def _get_file(self, filename, title=None):
-        import os
+        import os, codecs
         error = False
         if os.path.isfile(filename):
-            f = open(filename)
+            f = codecs.open(filename, encoding='utf-8')
             try:
                 lines = f.readlines()
                 if title and title.endswith('\n'):
@@ -132,12 +134,11 @@ class DelogXAPI():
         return self._get_title(self._page_dir + filename)
 
     def _get_title(self, filename):
-        import os
-        import re
+        import os, re, codecs
         if os.path.isfile(filename):
             pattern1 = re.compile(r'^\s*#\s*([^#]+)\s*#*\s*$')
             pattern2 = re.compile(r'^\s*=+\s*$')
-            f = open(filename)
+            f = codecs.open(filename, encoding='utf-8')
             try:
                 line1 = f.readline().strip('\n').strip('\r')
                 line2 = f.readline().strip('\n').strip('\r')
@@ -185,8 +186,7 @@ class DelogXAPI():
         self.global_posts = sorted(self.global_posts, key=_get_sort_key, reverse=True)
 
     def _update_page_list(self):
-        import os
-        import re
+        import os, re
         pattern = re.compile(r'^\.\d+$')
         del self.global_pages[:]
         if not os.path.exists(self._page_dir):
@@ -245,6 +245,15 @@ class DelogXAPI():
                 continue
         self.global_pages = sorted(self.global_pages, key=_cmp_to_key(_sort_compare))
     
+    def unicode_convert(self, uni, tobyte=True):
+        import sys
+        if sys.version_info.major < 3:
+            if tobyte:
+                return uni.encode('utf-8')
+            else:
+                return uni.decode('utf-8')                
+        return uni
+    
     def markdown_parser(self, input_md):
         try:
             import markdown
@@ -258,7 +267,7 @@ class DelogXAPI():
                 #md.preprocessors.add('fenced_code_block', CodeExtPreprocesser(md), ">normalize_whitespace")
         #class CodeExtPreprocesser(FencedBlockPreprocessor):
             #LANG_TAG = ' class="language-%s"'
-        return markdown.markdown(input_md.decode('utf-8'),
+        return markdown.markdown(input_md,
             output_format='html5',
             tab_length=4,
             extensions=[
@@ -266,4 +275,4 @@ class DelogXAPI():
                 'markdown.extensions.tables',
                 HeaderIdExtension(forceid=False),
                 'markdown.extensions.fenced_code'
-            ]).encode('utf-8')
+            ])
