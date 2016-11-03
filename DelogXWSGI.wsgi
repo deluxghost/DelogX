@@ -1,5 +1,7 @@
-activate_this = '/path/to/your/blog/env/bin/activate_this.py'
+import sys, os
+cwd = os.path.dirname(os.path.realpath(__file__))
+os.chdir(cwd)
+activate_this = os.path.join(cwd, 'env/bin/activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
-import sys
-sys.path.insert(0, '/path/to/your/blog')
+sys.path.insert(0, cwd)
 from DelogX import app as application

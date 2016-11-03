@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
 from DelogX.error import DelogXError
 
 class DelogXAPI():
@@ -66,7 +67,7 @@ class DelogXAPI():
             post_filename = post['url']
             if post['hidden']:
                 post_filename = '.' + post_filename
-            post_filename = self._post_dir + post_filename + '.md'
+            post_filename = os.path.join(self._post_dir, post_filename + '.md')
             post_info = {
                 'url': self._post_url + post['url'],
                 'title': post['title'],
@@ -90,7 +91,7 @@ class DelogXAPI():
                 page_filename = '.' + page_filename
             if page['sort'] is not None:
                 page_filename += '.' + str(page['sort'])
-            page_filename = self._page_dir + page_filename + '.md'
+            page_filename = os.path.join(self._page_dir, page_filename + '.md')
             page_info = {
                 'url': self._page_url + page['url'],
                 'title': page['title'],
@@ -105,7 +106,7 @@ class DelogXAPI():
             return None
     
     def _get_file(self, filename, title=None):
-        import os, codecs
+        import codecs
         error = False
         if os.path.isfile(filename):
             f = codecs.open(filename, encoding='utf-8')
@@ -128,13 +129,13 @@ class DelogXAPI():
             return None
 
     def get_post_title(self, filename):
-        return self._get_title(self._post_dir + filename)
+        return self._get_title(os.path.join(self._post_dir, filename))
     
     def get_page_title(self, filename):
-        return self._get_title(self._page_dir + filename)
+        return self._get_title(os.path.join(self._page_dir, filename))
 
     def _get_title(self, filename):
-        import os, re, codecs
+        import re, codecs
         if os.path.isfile(filename):
             pattern1 = re.compile(r'^\s*#\s*([^#]+)\s*#*\s*$')
             pattern2 = re.compile(r'^\s*=+\s*$')
@@ -163,18 +164,17 @@ class DelogXAPI():
         self._update_page_list()
 
     def _update_post_list(self):
-        import os
         del self.global_posts[:]
         if not os.path.exists(self._post_dir):
-            raise DelogXError(self._post_url + ' Not Found')
+            raise DelogXError(self._post_dir + ' Not Found')
         def _get_sort_key(post):
             return post['time']
         for filename in os.listdir(self._post_dir):
-            if os.path.isfile(self._post_dir + filename) and os.path.splitext(filename)[1] == '.md':
+            if os.path.isfile(os.path.join(self._post_dir, filename)) and os.path.splitext(filename)[1] == '.md':
                 post_meta = {
                     'url': os.path.splitext(filename)[0],
                     'title': self.get_post_title(filename),
-                    'time': os.path.getmtime(self._post_dir + filename),
+                    'time': os.path.getmtime(os.path.join(self._post_dir, filename)),
                     'hidden': False
                 }
                 if filename.startswith('.'):
@@ -186,11 +186,11 @@ class DelogXAPI():
         self.global_posts = sorted(self.global_posts, key=_get_sort_key, reverse=True)
 
     def _update_page_list(self):
-        import os, re
+        import re
         pattern = re.compile(r'^\.\d+$')
         del self.global_pages[:]
         if not os.path.exists(self._page_dir):
-            raise DelogXError(self._page_url + ' Not Found')
+            raise DelogXError(self._page_dir + ' Not Found')
         def _sort_compare(a, b):
             a_sort = a['sort']
             b_sort = b['sort']
@@ -226,7 +226,7 @@ class DelogXAPI():
                     return orig_cmp(self.obj, other.obj) != 0
             return C
         for filename in os.listdir(self._page_dir):
-            if os.path.isfile(self._page_dir + filename) and os.path.splitext(filename)[1] == '.md':
+            if os.path.isfile(os.path.join(self._page_dir, filename)) and os.path.splitext(filename)[1] == '.md':
                 page_meta = {
                     'url': os.path.splitext(filename)[0],
                     'title': self.get_page_title(filename),

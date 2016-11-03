@@ -18,8 +18,8 @@ site_info = { # 站点设置
         '/static/highlight.js',
         '/static/highlight.init.js'
     ],
-    'POST_DIR': '/path/to/your/blog/posts/', # 文章文件的存储目录
-    'PAGE_DIR': '/path/to/your/blog/pages/', # 页面文件的存储目录
+    'POST_DIR': './posts/', # 文章文件的存储目录
+    'PAGE_DIR': './pages/', # 页面文件的存储目录
     'POST_URL': '/posts/', # 文章的 URL 前缀
     'PAGE_URL': '/pages/', # 页面的 URL 前缀
     'POST_LIST_URL': '/n/', # 文章列表的 URL 前缀

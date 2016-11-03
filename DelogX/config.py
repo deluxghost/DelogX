@@ -13,8 +13,8 @@ class DelogXConfig():
             '/static/highlight.js',
             '/static/highlight.init.js'
         ],
-        'POST_DIR': '/path/to/your/blog/posts/',
-        'PAGE_DIR': '/path/to/your/blog/pages/',
+        'POST_DIR': './posts/',
+        'PAGE_DIR': './pages/',
         'POST_URL': '/posts/',
         'PAGE_URL': '/pages/',
         'POST_LIST_URL': '/n/',
