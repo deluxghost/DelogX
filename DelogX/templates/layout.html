@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     {%- if post %}
-    <title>{{ post['title'].strip('\n').decode('utf-8') }} - {{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    <title>{{ post['title'].strip('\n') }} - {{ site_config['SITE_NAME'] }}</title>
     {%- elif page %}
-    <title>{{ page['title'].strip('\n').decode('utf-8') }} - {{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    <title>{{ page['title'].strip('\n') }} - {{ site_config['SITE_NAME'] }}</title>
     {%- else %}
-    <title>{{ site_config['SITE_NAME'].decode('utf-8') }}</title>
+    <title>{{ site_config['SITE_NAME'] }}</title>
     {%- endif %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {%- for css in site_config['CSS_LIST'] %}
-    <link rel="stylesheet" type="text/css" href="{{ css.decode('utf-8') }}">
+    <link rel="stylesheet" type="text/css" href="{{ css }}">
     {%- endfor %}
     {%- for js in site_config['JS_LIST'] %}
-    <script type="text/javascript" src="{{ js.decode('utf-8') }}"></script>
+    <script type="text/javascript" src="{{ js }}"></script>
     {%- endfor %}
 </head>
 <body>

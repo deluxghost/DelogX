@@ -1,12 +1,12 @@
 <header>
-    <div class="site-name"><a href="/">{{ site_config['SITE_NAME'].decode('utf-8') }}</a></div>
-    <div class="site-subname">{{ site_config['SITE_SUBNAME'].decode('utf-8') }}</div>
+    <div class="site-name"><a href="/">{{ site_config['SITE_NAME'] }}</a></div>
+    <div class="site-subname">{{ site_config['SITE_SUBNAME'] }}</div>
     <div>
         <nav class="nav-menu">
             <ul>
                 <li><a href="/">{{ _('Homepage') }}</a></li>
                 {%- for nav in header %}
-                | <li><a href="{{ nav['url'].decode('utf-8') }}">{{ nav['title'].strip('\n').decode('utf-8') }}</a></li>
+                | <li><a href="{{ nav['url'] }}">{{ nav['title'].strip('\n') }}</a></li>
                 {%- endfor %}
             </ul>
         </nav>
