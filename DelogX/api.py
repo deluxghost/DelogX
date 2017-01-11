@@ -267,6 +267,11 @@ class DelogXAPI():
                 #md.preprocessors.add('fenced_code_block', CodeExtPreprocesser(md), ">normalize_whitespace")
         #class CodeExtPreprocesser(FencedBlockPreprocessor):
             #LANG_TAG = ' class="language-%s"'
+        class DelExtension(markdown.extensions.Extension):
+            def extendMarkdown(self, md, md_globals):
+                from markdown.inlinepatterns import SimpleTagPattern
+                DEL_RE = r"(\~\~)(.+?)(\~\~)"
+                md.inlinePatterns.add('del', SimpleTagPattern(DEL_RE, 'del'), '<not_strong')
         return markdown.markdown(input_md,
             output_format='html5',
             tab_length=4,
@@ -274,5 +279,6 @@ class DelogXAPI():
                 'markdown.extensions.attr_list',
                 'markdown.extensions.tables',
                 HeaderIdExtension(forceid=False),
-                'markdown.extensions.fenced_code'
+                'markdown.extensions.fenced_code',
+                DelExtension()
             ])
