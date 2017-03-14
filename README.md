@@ -2,7 +2,7 @@
 
 A blog system, written in Python
 
-Very experimental version, still in progress...
+Still in progress...
 
 ## Minimal install
 
@@ -12,12 +12,12 @@ Ensure you have installed pip.
 git clone https://github.com/deluxghost/DelogX.git
 ```
 
-You can config `DelogX/config.py`.
+You can config `config.json`.
 
 Then install requirements.
 
 ```shell
 cd DelogX
 pip install -r requirements.txt
-python ./run.py
+python ./debug.py
 ```

@@ -1,2 +1,7 @@
 *.py[cod]
+.sync/
 .vscode/
+env/
+venv/
+__pycache__/
+debug.log

@@ -1,7 +1,14 @@
-import sys, os
-cwd = os.path.dirname(os.path.realpath(__file__))
-os.chdir(cwd)
-activate_this = os.path.join(cwd, 'env/bin/activate_this.py')
-execfile(activate_this, dict(__file__=activate_this))
-sys.path.insert(0, cwd)
+import os
+import sys
+CWD = os.path.dirname(os.path.realpath(__file__))
+os.chdir(CWD)
+ACTIVATE = [
+    os.path.join(CWD, 'env/bin/activate_this.py'),
+    os.path.join(CWD, 'venv/bin/activate_this.py')
+]
+for activate_this in ACTIVATE:
+    if os.path.exists(activate_this):
+        execfile(activate_this, dict(__file__=activate_this))
+        break
+sys.path.insert(0, CWD)
 from DelogX import app as application

@@ -1,5 +1,7 @@
 # 示例页面
 
+本页面的作用是向用户展示 Markdown 的实际效果，您可以用文本编辑器打开本页面的文件 `demo.md` 并查看其中的源代码。
+
 ## 标题 Header
 
 # 一级标题 H1
@@ -24,6 +26,10 @@
 
 混合起来的***特殊强调***也不错。
 
+### 删除线 Strike
+
+~~一段过期了的文字。~~
+
 ### 引用 Quotes
 
 > Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。
@@ -47,7 +53,7 @@
 >         print i
 >
 
-### 列表 List
+### 列表 Lists
 
 #### 无序列表
 
@@ -79,26 +85,23 @@
 
 ## 代码 Codes
 
-代码可以直接写在正文中，例如`echo -e "\033[32mHello"`或者`looooool`，也可以写成代码块的形式，例如
+代码可以直接写在正文中，例如 `echo -e "\033[32mHello"` 或者 `lolololol`，也可以写成代码块的形式，例如
 
-    def get_header(self):
-        page_list = []
-        for page in self.global_pages:
-            if page['hidden']:
-                continue
-            else:
-                page_info = {
-                    'url': self._page_url + page['url'],
-                    'title': page['title']
-                }
-                if not page['title']:
-                    page_info['title'] = page['url']
-                page_list.append(page_info)
-        return page_list
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run()
+```
 
 ## 链接 Links
 
-行内式链接：[GitHub](http://github.com/)
+行内式链接：[GitHub](https://github.com/)
 
 参考式链接：[Wikipedia][1]
 
@@ -110,9 +113,9 @@
 
 图片与链接的语法非常接近。
 
-![Wikipedia](https://upload.wikimedia.org/wikipedia/zh/6/62/Wiki_zh-hans.png "一张图片")
+![Flask](http://flask.pocoo.org/static/logo.png "一张图片")
 
-## 水平线
+## 水平线 Horizontal Lines
 
 ***
 

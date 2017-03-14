@@ -1,0 +1,33 @@
+{
+    "site": {
+        "name": "DelogX",
+        "subname": "Another Markdown blog, written in Python"
+    },
+    "local": {
+        "theme": "",
+        "locale": "zh_CN",
+        "list_size": 10,
+        "watch_polling": false,
+        "time_format": "%Y-%m-%d %H:%M"
+    },
+    "url_prefix": {
+        "post": "/post",
+        "page": "/page",
+        "post_list": "/list",
+        "static": "/static"
+    },
+    "directory": {
+        "post": "posts",
+        "page": "pages",
+        "static": "static",
+        "themes": "themes"
+    },
+    "static": {
+        "css": [],
+        "js": []
+    },
+    "debug": {
+        "host": "0.0.0.0",
+        "port": 8000
+    }
+}

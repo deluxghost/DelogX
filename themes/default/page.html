@@ -1,9 +1,9 @@
 {%- extends "layout.html" %}
 {%- block body %}
 <article>
-    <h1 class="page-title"><a href="{{ page['url'] }}">{{ page['title'].strip('\n') }}</a></h1>
+    <h1 class="page-title"><a href="{{ page.cooked_url }}">{{ page.title.strip('\n') }}</a></h1>
     <div class="page-content">
-{{ page['content']|safe }}
+{{ page.content|safe }}
     </div>
 </article>
 {%- endblock %}
