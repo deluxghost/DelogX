@@ -4,8 +4,8 @@
         "subname": "Another Markdown blog, written in Python"
     },
     "local": {
-        "theme": "",
-        "locale": "zh_CN",
+        "theme": "default",
+        "locale": "en_US",
         "list_size": 10,
         "watch_polling": false,
         "time_format": "%Y-%m-%d %H:%M"
