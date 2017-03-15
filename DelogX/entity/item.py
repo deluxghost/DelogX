@@ -109,6 +109,7 @@ class Post(Item):
     Attributes:
 
         time (float): Modification timestamp of this post.
+        cooked_time (str): Formatted modification time.
     '''
     time = None
 
