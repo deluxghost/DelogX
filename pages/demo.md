@@ -49,8 +49,8 @@
 
 > 一个 Python 循环
 >
->     for i in range(0, 5):
->         print i
+>     for i in range(5):
+>         print(i)
 >
 
 ### 列表 Lists

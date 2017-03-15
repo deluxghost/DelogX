@@ -1,5 +1,7 @@
 # DelogX
 
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/deluxghost/DelogX/master/LICENSE)
+
 A blog system, written in Python
 
 Still in progress...

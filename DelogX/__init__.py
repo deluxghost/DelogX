@@ -99,7 +99,10 @@ class DelogX(object):
             page_dir)
         post_watch = Watch(self, self.post_bundle, ['*.md'])
         page_watch = Watch(self, self.page_bundle, ['*.md'], is_page=True)
-        if conf('local.watch_polling'):
+        watch_polling = conf('local.watch_polling')
+        if Compat.is_wsl():
+            watch_polling = True
+        if watch_polling:
             self.observer = PollingObserver()
         else:
             self.observer = Observer()

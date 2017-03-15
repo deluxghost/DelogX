@@ -2,6 +2,8 @@
 '''The utils about compatibility.'''
 from __future__ import unicode_literals
 
+import codecs
+import os
 import platform
 import sys
 
@@ -30,6 +32,23 @@ class Compat(object):
         return platform.system()
 
     @classmethod
+    def is_wsl(cls):
+        '''Whether DelogX is running on WSL (Windows Subsystem for Linux).'''
+        def _read_file(filename):
+            if not os.path.isfile(filename):
+                return ''
+            with codecs.open(filename, encoding='utf-8') as some_file:
+                lines = some_file.readlines()
+            return ''.join(lines)
+        if Compat.sys() != 'Linux':
+            return False
+        version = _read_file('/proc/version')
+        osrelease = _read_file('/proc/sys/kernel/osrelease')
+        if 'Microsoft' in version or 'Microsoft' in osrelease:
+            return True
+        return False
+
+    @classmethod
     def unicode_convert(cls, string, to_byte=True):
         '''Convert a string to unicode or byte.
 
@@ -42,7 +61,7 @@ class Compat(object):
 
             str: Converted string.
         '''
-        if cls.version() < 3:
+        if Compat.version() < 3:
             if to_byte:
                 return string.encode('utf-8')
             else:

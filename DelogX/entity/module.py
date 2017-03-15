@@ -42,7 +42,7 @@ class Module(object):
 
             bool: Whether all required modules are installed.
         '''
-        return cls.missing() is None
+        return Module.missing() is None
 
     @classmethod
     def missing(cls):
@@ -53,8 +53,8 @@ class Module(object):
             list of str: Names of the missing modules.
         '''
         modules_missing = list()
-        for module in cls.modules_require:
-            if not cls.has(module):
+        for module in Module.modules_require:
+            if not Module.has(module):
                 modules_missing.append(module)
         if modules_missing:
             return modules_missing
