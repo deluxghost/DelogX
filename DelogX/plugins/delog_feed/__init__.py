@@ -12,7 +12,7 @@ from DelogX.entity.plugin import Plugin
 from DelogX.utils.path import Path
 
 
-class BlogFeed(Plugin):
+class DelogFeed(Plugin):
 
     config = None
     feed_url = None
@@ -20,8 +20,8 @@ class BlogFeed(Plugin):
 
     def run(self):
         self.config = Config(os.path.join(self.workspace, 'config.json'))
-        self.feed_url = self.config.get('blog_feed.url')
-        self.feed_limit = self.config.get('blog_feed.limit')
+        self.feed_url = self.config.get('delog_feed.url')
+        self.feed_limit = self.config.get('delog_feed.limit')
         if not self.feed_url:
             self.feed_url = '/feed'
         if not self.feed_limit:
@@ -29,7 +29,7 @@ class BlogFeed(Plugin):
         self.feed_url = Path.format_url(self.feed_url)
         if not self.feed_url.endswith('/'):
             self.feed_url += '/'
-        self.app.add_url_rule(self.feed_url, 'blog_feed', self.make_feed)
+        self.app.add_url_rule(self.feed_url, 'delog_feed', self.make_feed)
         self.manager.add_filter('dx_render', self.add_link)
 
     def add_link(self, render):

@@ -8,6 +8,7 @@ import time
 
 from flask import render_template, abort, send_from_directory
 from watchdog.observers import Observer
+from watchdog.observers.polling import PollingObserver
 
 from DelogX.entity.bundle import PostBundle, PageBundle
 from DelogX.entity.config import Config
@@ -98,7 +99,10 @@ class DelogX(object):
             page_dir)
         post_watch = Watch(self, self.post_bundle, ['*.md'])
         page_watch = Watch(self, self.page_bundle, ['*.md'], is_page=True)
-        self.observer = Observer()
+        if conf('local.watch_polling'):
+            self.observer = PollingObserver()
+        else:
+            self.observer = Observer()
         self.observer.setDaemon(True)
         self.observer.schedule(post_watch, post_dir)
         self.observer.schedule(page_watch, page_dir)

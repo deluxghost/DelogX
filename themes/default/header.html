@@ -4,7 +4,7 @@
     <div>
         <nav class="nav-menu">
             <ul>
-                <li><a href="/">{{ _g('Homepage') }}</a></li>
+                <li><a href="/">{{ _g('Home') }}</a></li>
                 {%- for nav in app.header %}
                 {% if nav.link %}
                 | <li><a href="{{ nav.link }}" target="{{ nav.target }}">{{ nav.title.strip('\n') }}</a></li>
