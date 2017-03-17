@@ -20,12 +20,13 @@ class ExternalLink(Plugin):
             r'\<\/a\>(?:\<\/p\>)?$',
             re.IGNORECASE)
         target_re = re.compile(r'target="([^"]*)"', re.IGNORECASE)
-        link_match = link_re.match(page.content.strip())
+        content = page.content.replace('\n', ' ').strip()
+        link_match = link_re.match(content)
         if link_match:
-            page.link = link_match.group(1).replace('\n', '').strip()
-            link_title = link_match.group(2).replace('\n', '').strip()
+            page.link = link_match.group(1).strip()
+            link_title = link_match.group(2).strip()
             page.title = link_title if link_title else page.title
-            target_search = target_re.search(page.content.strip())
+            target_search = target_re.search(content)
             page.target = ''
             if target_search:
                 page.target = target_search.group(1).replace('\n', '').strip()

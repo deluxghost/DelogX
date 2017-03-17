@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 '''The class, definition and interface of DelogX.'''
-
 from __future__ import unicode_literals
 
 import os
@@ -36,25 +35,25 @@ class DelogX(object):
         plugin_manager (PluginManager): Plugin manager of DelogX.
     '''
 
-    def __init__(self, framework, config='config.json'):
+    def __init__(self, app_path, framework, config='config.json'):
         '''Initialize DelogX object.
 
         Args:
 
+            app_path (str): Absolute path of the blog application.
             framework (Flask): Flask application object.
             config (str): Config file of DelogX, defaults `config.json`.
         '''
         self.framework = framework
+        app_path = os.path.realpath(app_path)
+        config = Path.abs_path(app_path, config)
+        config = Config(config)
         runtime = Config()
         module_path = os.path.dirname(os.path.realpath(__file__))
-        runtime.let('path.app', os.path.abspath(
-            os.path.join(module_path, os.pardir)))
-        runtime.let('path.module', os.path.join(
-            runtime.get('path.app'), 'DelogX'))
-        config = Path.abs_path(runtime.get('path.app'), config)
-        config = Config(config)
-        self.runtime = runtime
+        runtime.let('path.app', app_path)
+        runtime.let('path.module', module_path)
         self.config = config
+        self.runtime = runtime
         self.markdown_ext = list()
         self.init_runtime()
         self.init_route()
@@ -65,79 +64,71 @@ class DelogX(object):
         '''Initialize runtime environments of DelogX.'''
         conf = self.default_conf
         runtime = self.runtime
-        post_dir = Path.abs_path(
-            runtime.get('path.app'), conf('directory.post'))
-        page_dir = Path.abs_path(
-            runtime.get('path.app'), conf('directory.page'))
-        static_dir = Path.abs_path(
-            runtime.get('path.app'), conf('directory.static'))
-        themes_dir = Path.abs_path(
-            runtime.get('path.app'), conf('directory.themes'))
+        app_path = runtime.get('path.app')
+        module_path = runtime.get('path.module')
+        init_path_list = [
+            'directory.post',
+            'directory.page',
+            'directory.static',
+            'directory.themes'
+        ]
+        init_url_list = [
+            'url_prefix.post',
+            'url_prefix.page',
+            'url_prefix.static',
+            'url_prefix.post_list'
+        ]
+        for key in init_path_list:
+            runtime.let(key, Path.abs_path(app_path, conf(key)))
+        for key in init_url_list:
+            runtime.let(key, Path.format_url(conf(key)))
+        post_dir = runtime.get('directory.post')
+        page_dir = runtime.get('directory.page')
+        themes_dir = runtime.get('directory.themes')
         theme = conf('local.theme')
-        if not theme:
-            theme = 'default'
-        runtime.let('directory.post', post_dir)
-        runtime.let('directory.page', page_dir)
-        runtime.let('directory.static', static_dir)
-        runtime.let('directory.themes', themes_dir)
-        runtime.let(
-            'url_prefix.post', Path.format_url(conf('url_prefix.post')))
-        runtime.let(
-            'url_prefix.page', Path.format_url(conf('url_prefix.page')))
-        runtime.let(
-            'url_prefix.static', Path.format_url(conf('url_prefix.static')))
-        runtime.let(
-            'url_prefix.post_list',
-            Path.format_url(conf('url_prefix.post_list')))
+        theme = 'default' if not theme else theme
         theme_path = os.path.join(themes_dir, theme)
         self.framework.template_folder = theme_path
         self.post_bundle = PostBundle(
-            self, runtime.get('path.app'),
-            post_dir, conf('local.list_size'))
-        self.page_bundle = PageBundle(
-            self, runtime.get('path.app'),
-            page_dir)
+            self, app_path, post_dir, conf('local.list_size'))
+        self.page_bundle = PageBundle(self, app_path, page_dir)
         post_watch = Watch(self, self.post_bundle, ['*.md'])
         page_watch = Watch(self, self.page_bundle, ['*.md'], is_page=True)
         watch_polling = conf('local.watch_polling')
-        if Compat.is_wsl():
-            watch_polling = True
-        if watch_polling:
-            self.observer = PollingObserver()
-        else:
-            self.observer = Observer()
+        watch_polling = True if Compat.is_wsl() else watch_polling
+        self.observer = PollingObserver() if watch_polling else Observer()
         self.observer.setDaemon(True)
         self.observer.schedule(post_watch, post_dir)
         self.observer.schedule(page_watch, page_dir)
         self.observer.start()
         self.i18n = I18n(
-            Path.format_url(runtime.get('path.module'), 'locale'),
-            conf('local.locale'))
+            Path.format_url(module_path, 'locale'), conf('local.locale'))
 
     def init_route(self):
         '''Initialize URL routes of DelogX.'''
         runtime = self.runtime
+        static_rule = Path.format_url(
+            runtime.get('url_prefix.static'), '<static_file>')
+        list_rule = Path.format_url(
+            runtime.get('url_prefix.post_list'), '<int:number>/')
+        item_rule = Path.format_url(
+            runtime.get('url_prefix.page'), '<item_id>/')
+        page_rule = Path.format_url(
+            runtime.get('url_prefix.page'), '<page_id>/')
+        post_rule = Path.format_url(
+            runtime.get('url_prefix.post'), '<post_id>/')
+        icon_rule = Path.format_url(
+            runtime.get('url_prefix.static'), 'favicon.ico')
         self.add_url_rule('/', 'delogx_index', self.route_index)
-        self.add_url_rule(Path.format_url(
-            runtime.get('url_prefix.static'),
-            '<static_file>'), 'delogx_static', self.route_static)
-        self.add_url_rule(Path.format_url(
-            runtime.get('url_prefix.post_list'),
-            '<int:number>/'), 'delogx_list', self.route_list)
+        self.add_url_rule(static_rule, 'delogx_static', self.route_static)
+        self.add_url_rule(list_rule, 'delogx_list', self.route_list)
         if runtime.get('url_prefix.post') == runtime.get('url_prefix.page'):
-            self.add_url_rule(
-                Path.format_url(runtime.get('url_prefix.page'), '<item_id>/'),
-                'delogx_page', self.route_item)
+            self.add_url_rule(item_rule, 'delogx_page', self.route_item)
         else:
-            self.add_url_rule(
-                Path.format_url(runtime.get('url_prefix.page'), '<page_id>/'),
-                'delogx_page', self.route_page)
-            self.add_url_rule(
-                Path.format_url(runtime.get('url_prefix.post'), '<post_id>/'),
-                'delogx_post', self.route_post)
-        icon = Path.format_url(runtime.get('url_prefix.static'), 'favicon.ico')
+            self.add_url_rule(page_rule, 'delogx_page', self.route_page)
+            self.add_url_rule(post_rule, 'delogx_post', self.route_post)
         self.framework.add_url_rule(
-            '/favicon.ico', 'delogx_favicon', redirect_to=icon)
+            '/favicon.ico', 'delogx_favicon', redirect_to=icon_rule)
         self.framework.errorhandler(404)(self.route_not_found)
 
     def init_plugins(self):

@@ -6,8 +6,6 @@ import os
 
 from watchdog.events import PatternMatchingEventHandler
 
-from DelogX.utils.compat import Compat
-
 
 class Watch(PatternMatchingEventHandler):
     '''Event handler to watch file changing event in some directory.
@@ -28,13 +26,8 @@ class Watch(PatternMatchingEventHandler):
             patterns (list of str): Patterns to allow matching event paths.
             is_page (bool): Whether the bundle is a PageBundle.
         '''
-        if Compat.sys() == 'Windows':
-            super(Watch, self).__init__(
-                patterns=patterns, ignore_directories=True)
-        else:
-            super(Watch, self).__init__(
-                patterns=patterns, ignore_directories=True,
-                case_sensitive=True)
+        super(Watch, self).__init__(
+            patterns=patterns, ignore_directories=True)
         self.app = app
         self.bundle = bundle
         self.is_page = is_page
