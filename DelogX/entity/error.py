@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The class, definition and interface of Error.'''
+'''DelogX.entity.error
+
+Define error interface of DelogX.
+'''
 from __future__ import unicode_literals
 
 

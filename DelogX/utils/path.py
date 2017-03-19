@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The utils and functions about path.'''
+'''DelogX.utils.path
+
+Utils and functions about path.
+'''
 from __future__ import unicode_literals
 
 import codecs

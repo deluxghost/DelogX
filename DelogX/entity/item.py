@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-'''The class, definition and interface of Item.'''
+'''DelogX.entity.item
+
+Define class and interface of a item.
+
+An item is a post or page.
+'''
 from __future__ import unicode_literals
 
 import codecs
@@ -135,4 +140,6 @@ class Page(Item):
         match = sort_re.match(os.path.splitext(self.url)[1])
         if match:
             self.url = os.path.splitext(self.url)[0]
+            if self.title_mode == 0:
+                self.title = self.url
             self.sort = int(match.group()[1:])

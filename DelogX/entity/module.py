@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The class, definition and interface of Module.'''
+'''DelogX.entity.module
+
+Class to check whether modules ready.
+'''
 from __future__ import unicode_literals
 
 

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The utils about markdown parser.'''
+'''DelogX.utils.parser
+
+Utils of markdown parser.
+'''
 from __future__ import unicode_literals
 
 import markdown
@@ -22,12 +25,10 @@ class Markdown(object):
 
             str: Parsed HTML text.
         '''
-        from markdown.extensions.headerid import HeaderIdExtension
         ext_list = [
             'markdown.extensions.attr_list',
             'markdown.extensions.tables',
             'markdown.extensions.fenced_code',
-            HeaderIdExtension(forceid=False),
             DelExtension()
         ]
         if exts and isinstance(exts, list):

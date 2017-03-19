@@ -1,0 +1,10 @@
+{%- extends "layout.html" %}
+{%- block body %}
+<article>
+    <h1 class="post-title"><a href="{{ post.cooked_url }}">{{ post.title.strip('\n') }}</a></h1>
+    <span class="post-time">{{ post.cooked_time }}</span>
+    <div class="post-content">
+{{ post.content|safe }}
+    </div>
+</article>
+{%- endblock %}

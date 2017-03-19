@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-'''The class, definition and interface of Bundle.
+'''DelogX.entity.bundle
 
-Bundle is a set of items.
+Define class and interface of a bundle.
+
+A bundle is a set of items.
 '''
 from __future__ import unicode_literals
 
@@ -184,6 +186,7 @@ class PostBundle(DelogXBundle):
         post = Post(self.app, filename, self.directory)
         if post.valid():
             self.bundle_list[filename] = post
+            self.sort()
             return True
         return False
 
@@ -264,6 +267,7 @@ class PageBundle(DelogXBundle):
         page = Page(self.app, filename, self.directory)
         if page.valid():
             self.bundle_list[filename] = page
+            self.sort()
             return True
         return False
 

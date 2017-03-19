@@ -1,0 +1,18 @@
+<header>
+    <div class="site-name"><a href="/">{{ _c('site.name') }}</a></div>
+    <div class="site-subname">{{ _c('site.subname') }}</div>
+    <div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="/">{{ _g('Home') }}</a></li>
+                {%- for nav in app.header %}
+                {% if nav.link %}
+                | <li><a href="{{ nav.link }}" target="{{ nav.target }}">{{ nav.title.strip('\n') }}</a></li>
+                {% else %}
+                | <li><a href="{{ nav.cooked_url }}">{{ nav.title.strip('\n') }}</a></li>
+                {% endif %}
+                {%- endfor %}
+            </ul>
+        </nav>
+    </div>
+</header>

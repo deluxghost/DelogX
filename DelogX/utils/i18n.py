@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The utils about i18n.'''
+'''DelogX.utils.i18n
+
+Utils about i18n, an i18n manager.
+'''
 from __future__ import unicode_literals
 
 import os

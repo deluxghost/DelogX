@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {%- if page %}
+    <title>{{ page.title.strip('\n') }} - {{ _c('site.name') }}</title>
+    {%- elif post %}
+    <title>{{ post.title.strip('\n') }} - {{ _c('site.name') }}</title>
+    {%- elif posts and list_id > 1 %}
+    <title>{{ _c('site.name') }} - {{ _g('Page {0}', list_id) }}</title>
+    {%- else %}
+    <title>{{ _c('site.name') }}</title>
+    {%- endif %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ _rt('url_prefix.static') }}/style.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css">
+    {%- for css in _c('static.css') %}
+    <link rel="stylesheet" type="text/css" href="{{ css }}">
+    {%- endfor %}
+</head>
+<body>
+{% include 'header.html' %}
+    {%- block body %}
+    {%- endblock %}
+{% include 'footer.html' %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+{%- for js in _c('static.js') %}
+<script type="text/javascript" src="{{ js }}"></script>
+{%- endfor %}
+</body>
+</html>

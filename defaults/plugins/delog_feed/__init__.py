@@ -8,8 +8,8 @@ from flask import request
 from werkzeug.contrib.atom import AtomFeed
 
 from DelogX.entity.config import Config
-from DelogX.utils.plugin import Plugin
 from DelogX.utils.path import Path
+from DelogX.utils.plugin import Plugin
 
 
 class DelogFeed(Plugin):

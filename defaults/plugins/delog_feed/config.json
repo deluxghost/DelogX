@@ -1,0 +1,6 @@
+{
+    "delog_feed": {
+        "url": "/feed",
+        "limit": 10
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "site": {
+        "name": "DelogX",
+        "subname": "Yet another Markdown based blog"
+    },
+    "local": {
+        "theme": "default",
+        "locale": "en_US",
+        "list_size": 10,
+        "watch_polling": false,
+        "time_format": "%Y-%m-%d %H:%M"
+    },
+    "url_prefix": {
+        "post": "/post",
+        "page": "/page",
+        "post_list": "/list",
+        "static": "/static"
+    },
+    "directory": {
+        "post": "posts",
+        "page": "pages",
+        "static": "static",
+        "themes": "themes",
+        "plugins": "plugins"
+    },
+    "static": {
+        "css": [],
+        "js": []
+    },
+    "debug": {
+        "host": "0.0.0.0",
+        "port": 8000
+    }
+}

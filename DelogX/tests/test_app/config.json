@@ -1,0 +1,27 @@
+{
+    "entry_a": {
+        "key_1_1": "String",
+        "key_1_2": 1000,
+        "key_1_3": -30.75,
+        "test": "Test X"
+    },
+    "entry_b": {
+        "key_2_1": null,
+        "key_2_2": true,
+        "key_2_3": false
+    },
+    "entry_c": {
+        "key_3_1": ["List_1_1", "List_1_2"],
+        "key_3_2": {
+            "key_3_2_1": {
+                "test_1": "Test 1",
+                "key_3_2_2": {
+                    "test_2": "Test 2"
+                }
+            },
+            "key_3_2_3": {
+                "test_3": "Test 3"
+            }
+        }
+    }
+}

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The watchdog handler of DelogX bundles.'''
+'''DelogX.utils.watch
+
+The watchdog handler of DelogX bundles.
+'''
 from __future__ import unicode_literals
 
 import os
@@ -55,7 +58,6 @@ class Watch(PatternMatchingEventHandler):
             filename (str): Name of the file.
         '''
         self.bundle.update(filename)
-        self.bundle.sort()
         if self.is_page:
             self.app.update_header()
 

@@ -11,10 +11,10 @@ from watchdog.observers.polling import PollingObserver
 
 from DelogX.entity.bundle import PostBundle, PageBundle
 from DelogX.entity.config import Config
-from DelogX.entity.plugin import PluginManager
 from DelogX.utils.compat import Compat
 from DelogX.utils.i18n import I18n
 from DelogX.utils.path import Path
+from DelogX.utils.plugin import PluginManager
 from DelogX.utils.watch import Watch
 
 

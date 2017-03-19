@@ -1,0 +1,24 @@
+{%- extends "layout.html" %}
+{%- block body %}
+{%- if posts %}
+{%- for post in posts %}
+{%- if post %}
+<article>
+    <h1 class="post-title"><a href="{{ post.cooked_url }}">{{ post.title.strip('\n') }}</a></h1>
+    <span class="post-time">{{ post.cooked_time }}</span>
+    <div class="post-content">
+{{ post.content|safe }}
+    </div>
+</article>
+{%- endif %}
+{%- endfor %}
+{%- else %}
+<div class="empty-post">{{ _g('No Post Here') }}</div>
+{%- endif %}
+{%- if prev_page %}
+<span class="prev-page"><a href="{{ list_url }}{{ list_id-1 }}">{{ _g('Previous Page') }}</a></span>
+{%- endif %}
+{%- if next_page %}
+<span class="next-page"><a href="{{ list_url }}{{ list_id+1 }}">{{ _g('Next Page') }}</a></span>
+{%- endif %}
+{%- endblock %}

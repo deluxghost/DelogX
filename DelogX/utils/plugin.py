@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-'''The class and interface of Plugin and PluginManager.'''
+'''DelogX.utils.plugin
+
+Base class of any plugin and a plugin manager.
+'''
 from __future__ import unicode_literals
 
 import errno
