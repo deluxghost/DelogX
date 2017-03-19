@@ -10,5 +10,5 @@ for activate_this in ACTIVATE:
     if os.path.exists(activate_this):
         execfile(activate_this, dict(__file__=activate_this))
         break
-sys.path.insert(0, CWD)
+sys.path.append(CWD)
 from DelogX import app as application

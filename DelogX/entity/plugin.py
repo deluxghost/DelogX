@@ -6,6 +6,7 @@ import errno
 import importlib
 import os
 import re
+import sys
 
 from DelogX.entity.config import Config
 
@@ -97,29 +98,30 @@ class PluginManager(object):
     filters = None
     actions = None
 
-    def __init__(self, app, app_path):
+    def __init__(self, app, directory):
         '''Initialize plugin manager.
 
         Args:
 
             app (DelogX): DelogX object.
-            app_path (str): Absolute path of DelogX app.
+            directory (str): Name of the plugins directory.
         '''
         self.app = app
         self.plugins = dict()
         self.filters = dict()
         self.actions = dict()
-        self.directory = os.path.join(app_path, 'plugins')
-        if not os.path.exists(self.directory):
+        self.directory = directory
+        if not os.path.exists(directory):
             try:
-                os.makedirs(self.directory)
+                os.makedirs(directory)
             except OSError as exception:
                 if (exception.errno != errno.EEXIST or
-                        not os.path.isdir(self.directory)):
+                        not os.path.isdir(directory)):
                     raise exception
-        init_py = os.path.join(self.directory, '__init__.py')
+        init_py = os.path.join(directory, '__init__.py')
         if not os.path.exists(init_py):
             open(init_py, 'a').close()
+        sys.path.append(directory)
 
     def load_all(self):
         '''Load all plugins in the plugin directory.'''
@@ -159,7 +161,7 @@ class PluginManager(object):
         description = meta.get('description', '')
         if not entry_name or plugin_name in self.plugins:
             return None
-        module_name = ['DelogX', 'plugins', plugin_name]
+        module_name = [plugin_name]
         module_name.extend(entry_name.split('.')[:-1])
         module_name = '.'.join(module_name)
         class_name = ''.join(entry_name.split('.')[-1:])

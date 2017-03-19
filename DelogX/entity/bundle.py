@@ -60,7 +60,7 @@ class DelogXBundle(Bundle):
         Args:
 
             app (DelogX): DelogX object.
-            app_path (str): Absolute path of DelogX app.
+            app_path (str): Absolute path of the blog application.
             directory (str): Name of items directory.
         '''
         self.app = app
@@ -163,7 +163,7 @@ class PostBundle(DelogXBundle):
         Args:
 
             app (DelogX): DelogX object.
-            app_path (str): Absolute path of DelogX app.
+            app_path (str): Absolute path of the blog application.
             post_dir (str): Name of posts directory.
             list_size (int): Count of posts per page, defaults 10.
         '''

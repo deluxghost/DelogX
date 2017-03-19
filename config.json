@@ -20,7 +20,8 @@
         "post": "posts",
         "page": "pages",
         "static": "static",
-        "themes": "themes"
+        "themes": "themes",
+        "plugins": "plugins"
     },
     "static": {
         "css": [],

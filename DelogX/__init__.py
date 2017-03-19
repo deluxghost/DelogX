@@ -70,7 +70,8 @@ class DelogX(object):
             'directory.post',
             'directory.page',
             'directory.static',
-            'directory.themes'
+            'directory.themes',
+            'directory.plugins'
         ]
         init_url_list = [
             'url_prefix.post',
@@ -133,8 +134,8 @@ class DelogX(object):
 
     def init_plugins(self):
         '''Initialize plugin manager of DelogX.'''
-        self.plugin_manager = PluginManager(
-            self, self.runtime.get('path.module'))
+        plugins_dir = self.runtime.get('directory.plugins')
+        self.plugin_manager = PluginManager(self, plugins_dir)
         manager = self.plugin_manager
         manager.add_filter('dx_page', self.cook_page, 0)
         manager.add_filter('dx_post', self.cook_post, 0)
