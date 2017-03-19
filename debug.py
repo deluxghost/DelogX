@@ -21,5 +21,7 @@ os.chdir(CWD)
 
 app = Flask(__name__)
 delogx = DelogX(CWD, app)
+debug_host = delogx.default_conf('debug.host')
+debug_port = delogx.default_conf('debug.port')
 
-delogx.framework.run(host="0.0.0.0", port=8000)
+delogx.framework.run(host=debug_host, port=debug_port)

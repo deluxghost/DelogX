@@ -1,7 +1,7 @@
 {
     "site": {
         "name": "DelogX",
-        "subname": "Another Markdown blog, written in Python"
+        "subname": "Yet another Markdown based blog"
     },
     "local": {
         "theme": "default",

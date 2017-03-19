@@ -157,7 +157,7 @@ class DelogX(object):
         conf = self.config.get
         default_dict = {
             'site.name': 'DelogX',
-            'site.subname': 'Another Markdown blog, written in Python',
+            'site.subname': 'Yet another Markdown based blog',
             'local.theme': 'default',
             'local.locale': 'en_US',
             'local.list_size': 10,
@@ -171,8 +171,11 @@ class DelogX(object):
             'directory.page': 'pages',
             'directory.static': 'static',
             'directory.themes': 'themes',
+            'directory.plugins': 'plugins',
             'static.css': [],
-            'static.js': []
+            'static.js': [],
+            'debug.host': '0.0.0.0',
+            'debug.port': 8000
         }
         return default_dict.get(key) if conf(key) is None else conf(key)
 
