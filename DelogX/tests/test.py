@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''tests.unit_test'''
+'''tests.test'''
 from __future__ import unicode_literals
 
 import os
@@ -69,6 +70,14 @@ class TestPost(unittest.TestCase):
         delogx_app = DelogX(app_path, app)
         self.bundle = delogx_app.post_bundle
 
+    def test_list_count(self):
+        self.assertEqual(self.bundle.get_list_count(list_size=2), 10)
+        self.assertEqual(self.bundle.get_list_count(list_size=6), 4)
+        self.assertEqual(self.bundle.get_list_count(list_size=10), 2)
+        self.assertEqual(self.bundle.get_list_count(list_size=11), 2)
+        self.assertEqual(self.bundle.get_list_count(list_size=18), 2)
+        self.assertEqual(self.bundle.get_list_count(list_size=20), 1)
+
 
 class TestConfig(unittest.TestCase):
 
@@ -127,6 +136,78 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(value_b, 'Test B')
         self.assertIsNone(self.config.get('test'))
         self.assertIsNone(self.config.get('test2.a.b.c'))
+
+
+class TestI18n(unittest.TestCase):
+
+    def setUp(self):
+        directory = os.path.dirname(os.path.realpath(__file__))
+        delogx = os.path.dirname(os.path.dirname(directory))
+        sys.path.append(delogx)
+        locale_dir = os.path.join(directory, 'test_app', 'locale')
+        from DelogX.utils.i18n import I18n
+        self.i18n = I18n(locale_dir, 'zh_CN')
+
+    def test_text(self):
+        self.assertEqual(self.i18n.get('Home'), '首页')
+        self.assertEqual(self.i18n.get('Page {0}', 5), '第 5 页')
+        self.assertEqual(self.i18n.get('Nothing'), 'Nothing')
+
+    def test_index(self):
+        self.assertEqual(self.i18n.get('Page {0}'), '第  页')
+        self.assertEqual(self.i18n.get('Page {0}', 1, 2), '第 1 页')
+
+
+class TestPlugin(unittest.TestCase):
+
+    def setUp(self):
+        directory = os.path.dirname(os.path.realpath(__file__))
+        delogx = os.path.dirname(os.path.dirname(directory))
+        sys.path.append(delogx)
+        app = Flask(__name__)
+        from DelogX import DelogX
+        app_path = os.path.join(directory, 'test_app')
+        delogx_app = DelogX(app_path, app)
+        self.app = delogx_app
+        self.manager = delogx_app.plugin_manager
+
+    def test_load(self):
+        plugin = self.manager.plugins['example_plugin']
+        self.assertEqual(plugin['author'], 'DelogX')
+        self.assertEqual(plugin['version'], '1.0')
+        self.assertEqual(plugin['description'], 'Example Plugin')
+
+
+class TestApp(unittest.TestCase):
+
+    def setUp(self):
+        directory = os.path.dirname(os.path.realpath(__file__))
+        delogx = os.path.dirname(os.path.dirname(directory))
+        sys.path.append(delogx)
+        app = Flask(__name__)
+        from DelogX import DelogX
+        app_path = os.path.join(directory, 'test_app')
+        delogx_app = DelogX(app_path, app)
+        self.app = delogx_app
+
+    def test_static(self):
+        static = [
+            'https://somedomain.com/test.js',
+            '//cdn.somedomain.com/test.js'
+            'http://somedomain.com/test.js'
+            '/test.js',
+            '/static/test.js',
+            'dir/test.js'
+        ]
+        cooked_static = [
+            'https://somedomain.com/test.js',
+            '//cdn.somedomain.com/test.js'
+            'http://somedomain.com/test.js'
+            '/test.js',
+            '/static/test.js',
+            '/static/dir/test.js'
+        ]
+        self.assertListEqual(self.app.cook_static(static), cooked_static)
 
 
 if __name__ == '__main__':
