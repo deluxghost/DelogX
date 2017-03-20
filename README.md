@@ -1,6 +1,7 @@
 # DelogX
 
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/deluxghost/DelogX/master/LICENSE)
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://travis-ci.org/deluxghost/DelogX/)
 
 DelogX is a lite, tiny, micro and dynamic markdown based blog framework, written in Python and powered by Flask.
 
