@@ -12,7 +12,7 @@ DelogX is a lite, tiny, micro and dynamic markdown based blog framework, written
 * Manage articles in one directory.
 * No database and admin panel, everything is file.
 * Compatible with Windows, OS X, Linux and even WSL or Android.
-* Compatible with Python 2.7/3.4.
+* Compatible with Python 2.7/3.3.
 * Configure everything, including localization.
 * Customize your blog with plugins and themes.
 * Deploy on Apache, Nginx or just built-in server.

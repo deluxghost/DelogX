@@ -9,6 +9,7 @@ import os
 from string import Formatter
 
 from DelogX.entity.config import Config
+from DelogX.utils.compat import Compat
 
 
 class I18nFormatter(Formatter):
@@ -18,12 +19,21 @@ class I18nFormatter(Formatter):
         self.default = default
 
     def get_value(self, key, args, kwargs):
-        if isinstance(key, int):
-            return args[key] if -len(args) <= key < len(args) else self.default
-        elif isinstance(key, str):
-            return kwargs.get(key, self.default)
+        default = self.default
+        if Compat.version() == 2:
+            if isinstance(key, int) or isinstance(key, long):
+                return args[key] if -len(args) <= key < len(args) else default
+            elif isinstance(key, str) or isinstance(key, unicode):
+                return kwargs.get(key, self.default)
+            else:
+                super(I18nFormatter, self).get_value(key, args, kwargs)
         else:
-            super(I18nFormatter, self).get_value(key, args, kwargs)
+            if isinstance(key, int):
+                return args[key] if -len(args) <= key < len(args) else default
+            elif isinstance(key, str):
+                return kwargs.get(key, self.default)
+            else:
+                super(I18nFormatter, self).get_value(key, args, kwargs)
 
 
 class I18n(object):
