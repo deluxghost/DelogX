@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/deluxghost/DelogX/master/LICENSE)
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://travis-ci.org/deluxghost/DelogX/)
 
-DelogX is a lite, tiny, micro and dynamic markdown based blog framework, written in Python and powered by Flask.
+DelogX is a lite, tiny, micro and dynamic Markdown based blog framework, written in Python and powered by Flask.
 
 ## Features
 
@@ -13,29 +13,46 @@ DelogX is a lite, tiny, micro and dynamic markdown based blog framework, written
 * Manage articles in one directory.
 * No database and admin panel, everything is file.
 * Compatible with Windows, OS X, Linux and even WSL or Android.
-* Compatible with Python 2.7/3.3.
+* Compatible with Python 2.7/3.3+.
 * Configure everything, including localization.
 * Customize your blog with plugins and themes.
 * Deploy on Apache, Nginx or just built-in server.
 
-## Getting Started
-
 ## Installation
 
-## Minimal install
-
-Ensure you have installed pip.
+Install DelogX with pip:
 
 ```shell
-git clone https://github.com/deluxghost/DelogX.git
+pip install DelogX
 ```
 
-You can config `config.json`.
-
-Then install requirements.
+You may need root permissions:
 
 ```shell
-cd DelogX
-pip install -r requirements.txt
-python ./debug.py
+sudo pip install DelogX
 ```
+
+## Getting Started
+
+After installing, Create a new directory to store your blog application, and enter it.
+
+```shell
+mkdir my_blog
+cd my_blog
+```
+
+Then run command:
+
+```delogx init```
+
+and follow the instructions to initialize.
+
+When the process is complete, run:
+
+```python debug.py```
+
+and visit "http://127.0.0.1:8000" to test if everything is ok.
+
+If everything is ok, you can read the [documentation] to learn about how to config and how to add posts.
+
+[documentation]: https://github.com/deluxghost/DelogX/wiki

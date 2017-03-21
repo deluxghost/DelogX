@@ -1,6 +1,6 @@
 # 你好，DelogX
 
-欢迎使用 DelogX。这是一个由 Python 编写的，基于 Flask 框架的轻量级伪静态博客系统。
+欢迎使用 DelogX。这是一个由 Python 编写的，基于 Flask 框架的轻量级动态 Markdown 博客系统。
 
 ## 快速入门
 
@@ -62,7 +62,7 @@ DelogX 默认提供了 GitHub 色彩方案，您也可以按照 highlight.js 的
 
 ### 静态文件
 
-DelogX 将 CSS、JS、图片等静态文件存储在 `DelogX/static` 目录中，您可以通过链接 `http://yourblog.com/static/` 来访问目录中的内容。
+DelogX 将 CSS、JS、图片等静态文件存储在 `static` 目录中，您可以通过链接 `http://yourblog.com/static/filename` 来访问目录中的内容。
 
 ### 配置文件
 
@@ -147,7 +147,7 @@ Markdown 被设计成兼容 HTML 格式，因此，您可以直接在 Markdown �
         return render_template('404.html'), 404
 ```
 
-DelogX 还支持另一种能够指定编程语言的围栏式代码块，开头和末尾的反引号数目没有限制，只要二者数目相同即可：
+DelogX 还支持另一种能够指定编程语言的围栏式代码块：
 
 ````markdown
 ```python

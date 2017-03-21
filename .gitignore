@@ -1,7 +1,9 @@
 *.py[cod]
 .sync/
 .vscode/
+dist/
 env/
 venv/
+DelogX.egg-info/
 __pycache__/
 debug.log
