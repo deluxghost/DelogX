@@ -43,13 +43,17 @@ cd my_blog
 
 Then run command:
 
-```delogx init```
+```shell
+delogx init
+```
 
 and follow the instructions to initialize.
 
 When the process is complete, run:
 
-```python debug.py```
+```shell
+python debug.py
+```
 
 and visit "http://127.0.0.1:8000" to test if everything is ok.
 
