@@ -6,7 +6,7 @@ import os
 
 from setuptools import setup, find_packages
 
-VERSION = '1.0.2'
+VERSION = '1.0.4'
 
 
 def find_package_data():
@@ -16,6 +16,7 @@ def find_package_data():
     path = os.path.join(path, 'DelogX')
     data_list = list()
     os.chdir(path)
+    data_list.append('DESCRIPTION.rst')
     for root, dirs, files in os.walk('defaults'):
         for dirname in dirs:
             data_list.append(os.path.join(root, dirname))
@@ -30,14 +31,13 @@ def find_package_data():
     return data_list
 
 
-desc = open('DESCRIPTION.rst')
+desc = open(os.path.join('DelogX', 'DESCRIPTION.rst'))
 DESCRIPTION = desc.read()
 desc.close()
 setup(
     name='DelogX',
     version=VERSION,
     packages=find_packages(),
-    scripts=['say_hello.py'],
     install_requires=[
         'Flask>=0.11',
         'watchdog',
