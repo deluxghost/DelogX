@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 '''Setup script of DelogX.'''
-from __future__ import unicode_literals
-
 import os
 
 from setuptools import setup, find_packages
 
-VERSION = '1.0.4'
+VERSION = '1.0.7'
 
 
 def find_package_data():
@@ -18,13 +16,9 @@ def find_package_data():
     os.chdir(path)
     data_list.append('DESCRIPTION.rst')
     for root, dirs, files in os.walk('defaults'):
-        for dirname in dirs:
-            data_list.append(os.path.join(root, dirname))
         for filename in files:
             data_list.append(os.path.join(root, filename))
     for root, dirs, files in os.walk('locale'):
-        for dirname in dirs:
-            data_list.append(os.path.join(root, dirname))
         for filename in files:
             data_list.append(os.path.join(root, filename))
     os.chdir(cwd)

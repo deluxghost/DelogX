@@ -7,19 +7,23 @@ import os
 import shutil
 import sys
 
-VERSION = '1.0.4'
+VERSION = '1.0.7'
 
 
 def copytree(src, dst):
     '''Copy all files in src to dst.'''
+    basename = os.path.basename(src)
+    if basename == '__pycache__':
+        return
     if not os.path.exists(dst):
         os.makedirs(dst)
     for item in os.listdir(src):
         sfile = os.path.join(src, item)
         dfile = os.path.join(dst, item)
+        ext = os.path.splitext(os.path.basename(sfile))[1]
         if os.path.isdir(sfile):
             copytree(sfile, dfile)
-        else:
+        elif ext != '.pyc':
             shutil.copyfile(sfile, dfile)
 
 
