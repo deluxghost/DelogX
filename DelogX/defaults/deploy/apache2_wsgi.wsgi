@@ -15,4 +15,4 @@ sys.path.append(CWD)
 from DelogX import DelogX
 app = Flask(__name__)
 delogx = DelogX(CWD, app)
-application = app
+application = delogx.framework

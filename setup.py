@@ -28,7 +28,7 @@ desc = open(os.path.join('DelogX', 'DESCRIPTION.rst'))
 DESCRIPTION = desc.read()
 desc.close()
 ver = open(os.path.join('DelogX', 'VERSION'))
-VERSION = ver.read()
+VERSION = ver.read().strip()
 ver.close()
 
 setup(
