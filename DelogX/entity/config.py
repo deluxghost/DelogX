@@ -86,7 +86,7 @@ class Config(object):
         if saveto is None:
             return False
         try:
-            content = json.dumps(self.config, indent=4)
+            content = json.dumps(self.config, indent=4, separators=(',', ': '))
         except TypeError:
             return False
         saveto_dir = os.path.dirname(saveto)

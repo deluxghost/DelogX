@@ -4,8 +4,6 @@ import os
 
 from setuptools import setup, find_packages
 
-VERSION = '1.0.7'
-
 
 def find_package_data():
     '''Get data files of DelogX.'''
@@ -15,6 +13,7 @@ def find_package_data():
     data_list = list()
     os.chdir(path)
     data_list.append('DESCRIPTION.rst')
+    data_list.append('VERSION')
     for root, dirs, files in os.walk('defaults'):
         for filename in files:
             data_list.append(os.path.join(root, filename))
@@ -28,6 +27,10 @@ def find_package_data():
 desc = open(os.path.join('DelogX', 'DESCRIPTION.rst'))
 DESCRIPTION = desc.read()
 desc.close()
+ver = open(os.path.join('DelogX', 'VERSION'))
+VERSION = ver.read()
+ver.close()
+
 setup(
     name='DelogX',
     version=VERSION,

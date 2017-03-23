@@ -7,8 +7,6 @@ import os
 import shutil
 import sys
 
-VERSION = '1.0.7'
-
 
 def copytree(src, dst):
     '''Copy all files in src to dst.'''
@@ -77,6 +75,9 @@ def init(init_args):
 
 def main():
     '''Main function of the manager.'''
+    ver = open(os.path.join('DelogX', 'VERSION'))
+    VERSION = ver.read()
+    ver.close()
     parser = argparse.ArgumentParser(
         description='Manage a DelogX blog application.')
     parser.add_argument(
