@@ -58,9 +58,9 @@ def init(init_args):
     deploy_dir = os.path.join(defaults, 'deploy')
     deploys = list()
     if init_args.apache:
-        deploys.append('apache2_wsgi.wsgi')
-    # if init_args.nginx:
-    #     deploys.append('uwsgi.py')
+        deploys.append('apache2.wsgi')
+    if init_args.nginx:
+        deploys.append('uwsgi.py')
     if init_args.tornado:
         deploys.append('tornado_wsgi.py')
     if init_args.gevent:
@@ -121,10 +121,10 @@ def main():
         '--mod-wsgi', '--apache2',
         dest='apache', help='deploy blog on Apache 2 and mod_wsgi',
         action='store_true')
-    # init_parser.add_argument(
-    #     '--uwsgi', '--nginx',
-    #     dest='nginx', help='deploy blog on uWSGI or Nginx',
-    #     action='store_true')
+    init_parser.add_argument(
+        '--uwsgi', '--nginx',
+        dest='nginx', help='deploy blog on uWSGI or Nginx',
+        action='store_true')
     init_parser.add_argument(
         '--tornado', help='deploy blog on Tornado',
         action='store_true')
