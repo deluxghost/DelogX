@@ -107,7 +107,7 @@ def main():
     parser = argparse.ArgumentParser(
         description='Manage a DelogX blog application.')
     parser.add_argument(
-        '-ver', '--version', action='version',
+        '-V', '--version', action='version',
         version='DelogX v{0}'.format(VERSION))
     subparsers = parser.add_subparsers(
         title='sub-commands', description='valid sub-commands',
@@ -119,17 +119,17 @@ def main():
         action='store_true')
     init_parser.add_argument(
         '--mod-wsgi', '--apache2',
-        dest='apache', help='deploy blog on Apache 2 and mod_wsgi',
+        dest='apache', help='deploy with Apache 2 (mod_wsgi)',
         action='store_true')
     init_parser.add_argument(
         '--uwsgi', '--nginx',
-        dest='nginx', help='deploy blog on uWSGI or Nginx',
+        dest='nginx', help='deploy with uWSGI or Nginx',
         action='store_true')
     init_parser.add_argument(
-        '--tornado', help='deploy blog on Tornado',
+        '--tornado', help='deploy with Tornado',
         action='store_true')
     init_parser.add_argument(
-        '--gevent', help='deploy blog on Gevent',
+        '--gevent', help='deploy with Gevent',
         action='store_true')
     init_parser.set_defaults(func=init)
     args = parser.parse_args()
