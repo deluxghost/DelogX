@@ -1,5 +1,4 @@
-DelogX is a lite, tiny, micro and dynamic Markdown based blog framework,
-written in Python and powered by Flask.
+DelogX is a lite, tiny, micro and dynamic Markdown based blog framework, written in Python and powered by Flask.
 
 Features
 --------
@@ -13,7 +12,7 @@ Features
 -  Compatible with Python 2.7/3.3+.
 -  Configure everything, including localization.
 -  Customize your blog with plugins and themes.
--  Deploy on Apache, Nginx or just built-in server.
+-  Deploy on Apache, Nginx, uWSGI, Tornado, Gevent or just built-in server.
 
 Installation
 ------------
@@ -33,8 +32,7 @@ You may need root permissions:
 Getting Started
 ---------------
 
-After installing, Create a new directory to store your blog application,
-and enter it.
+After installing, Create a new directory to store your blog application, and enter it.
 
 .. code:: shell
 
@@ -57,6 +55,4 @@ When the process is complete, run:
 
 and visit "http://127.0.0.1:8000" to test if everything is ok.
 
-If everything is ok, you can read the
-`documentation <https://github.com/deluxghost/DelogX/wiki>`__ to learn
-about how to config and how to add posts.
+If everything is ok, you can read the `documentation <https://github.com/deluxghost/DelogX/wiki>`__ to learn about how to config and how to add posts.
