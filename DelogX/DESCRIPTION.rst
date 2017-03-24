@@ -8,7 +8,7 @@ Features
 -  Write and publish with Markdown.
 -  Manage articles in one directory.
 -  No database and admin panel, everything is file.
--  Compatible with Windows, OS X, Linux and even WSL or Android.
+-  Compatible with Windows, macOS, Linux and even WSL or Android.
 -  Compatible with Python 2.7/3.3+.
 -  Configure everything, including localization.
 -  Customize your blog with plugins and themes.
