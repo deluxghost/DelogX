@@ -86,7 +86,7 @@ class TestConfig(unittest.TestCase):
         delogx = os.path.dirname(os.path.dirname(directory))
         sys.path.append(delogx)
         filename = os.path.join(directory, 'test_app', 'config.json')
-        from DelogX.entity.config import Config
+        from DelogX.utils.config import Config
         self.config = Config(filename)
 
     def test_string(self):

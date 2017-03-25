@@ -8,8 +8,8 @@ from __future__ import unicode_literals
 import os
 from string import Formatter
 
-from DelogX.entity.config import Config
 from DelogX.utils.compat import Compat
+from DelogX.utils.config import Config
 
 
 class I18nFormatter(Formatter):

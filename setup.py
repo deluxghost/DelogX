@@ -35,6 +35,18 @@ setup(
     name='DelogX',
     version=VERSION,
     packages=find_packages(),
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Operating System :: OS Independent',
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'Framework :: Flask',
+        'Programming Language :: Python',
+        'Natural Language :: English',
+        'Natural Language :: Chinese (Simplified)',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Internet :: WWW/HTTP :: WSGI :: Application'
+    ],
     install_requires=[
         'Flask>=0.11',
         'watchdog',
@@ -52,7 +64,7 @@ setup(
     author_email='deluxghost@gmail.com',
     description='Yet another Markdown based blog',
     long_description=DESCRIPTION,
-    license='Apache 2',
+    license='Apache License 2.0',
     keywords='flask markdown blog framework',
     url='http://delogx.deluxghost.me/'
 )

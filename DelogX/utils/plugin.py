@@ -11,7 +11,7 @@ import os
 import re
 import sys
 
-from DelogX.entity.config import Config
+from DelogX.utils.config import Config
 
 
 class Plugin(object):

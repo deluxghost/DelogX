@@ -7,7 +7,7 @@ import os
 from flask import request
 from werkzeug.contrib.atom import AtomFeed
 
-from DelogX.entity.config import Config
+from DelogX.utils.config import Config
 from DelogX.utils.path import Path
 from DelogX.utils.plugin import Plugin
 

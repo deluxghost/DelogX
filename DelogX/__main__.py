@@ -31,8 +31,8 @@ def init(init_args):
     '''Create a new blog application.'''
     module_path = os.path.dirname(os.path.realpath(__file__))
     sys.path.append(os.path.dirname(module_path))
-    from DelogX.entity.config import Config
     from DelogX.utils.compat import Compat
+    from DelogX.utils.config import Config
     cwd = os.getcwd()
     defaults = os.path.join(module_path, 'defaults')
     if os.listdir(cwd) and not init_args.force:
