@@ -26,10 +26,7 @@ class Path(object):
 
             str: Formatted URL.
         '''
-        if Compat.sys() == 'Windows':
-            return os.path.join('/', *args).replace('\\', '/')
-        else:
-            return os.path.join('/', *args)
+        return os.path.join('/', *args).replace(os.path.sep, '/')
 
     @classmethod
     def urlencode(cls, url):

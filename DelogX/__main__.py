@@ -48,11 +48,11 @@ def init(init_args):
             locales.append(lang)
     locale = ''
     while locale not in locales:
-        print('Choose Language({0}):\n> '.format(','.join(locales)), end='')
+        print('Choose Language({0}):'.format(','.join(locales)))
         if Compat.version() == 2:
-            locale = raw_input()
+            locale = raw_input('> ')
         else:
-            locale = input()
+            locale = input('> ')
     copytree(defaults, cwd)
     print('Creating deployment scripts')
     deploy_dir = os.path.join(defaults, 'deploy')
@@ -119,17 +119,17 @@ def main():
         action='store_true')
     init_parser.add_argument(
         '--mod-wsgi', '--apache2',
-        dest='apache', help='deploy with Apache 2 (mod_wsgi)',
+        dest='apache', help='deploy on Apache 2 (mod_wsgi)',
         action='store_true')
     init_parser.add_argument(
         '--uwsgi', '--nginx',
-        dest='nginx', help='deploy with uWSGI or Nginx',
+        dest='nginx', help='deploy on uWSGI or Nginx',
         action='store_true')
     init_parser.add_argument(
-        '--tornado', help='deploy with Tornado',
+        '--tornado', help='deploy on Tornado',
         action='store_true')
     init_parser.add_argument(
-        '--gevent', help='deploy with Gevent',
+        '--gevent', help='deploy on Gevent',
         action='store_true')
     init_parser.set_defaults(func=init)
     args = parser.parse_args()

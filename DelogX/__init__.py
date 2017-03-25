@@ -31,7 +31,7 @@ class DelogX(object):
         page_bundle (Bundle): Item bundle of DelogX pages.
         observer (Observer): Observer of watchdog module.
         i18n (I18n): I18n manager of DelogX.
-        markdown_ext (list of str/class): Extensions of markdown module.
+        markdown_ext (list of str/object): Extensions of markdown module.
         plugin_manager (PluginManager): Plugin manager of DelogX.
     '''
 
