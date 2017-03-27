@@ -8,10 +8,13 @@ import shutil
 import sys
 
 
-def copytree(src, dst):
+def copytree(src, dst, blacklist=None):
     '''Copy all files in src to dst.'''
+    if not blacklist:
+        blacklist = list()
+    blacklist.extend(['__pycache__', 'deploy'])
     basename = os.path.basename(src)
-    if basename == '__pycache__' or basename == 'deploy':
+    if basename in blacklist:
         return
     if not os.path.exists(dst):
         print(' Creating {0}'.format(dst))
@@ -132,10 +135,10 @@ def main():
         '--gevent', help='deploy on Gevent',
         action='store_true')
     init_parser.set_defaults(func=init)
-    args = parser.parse_args()
-    if not vars(args):
+    if len(sys.argv) <= 1:
         parser.print_help()
         parser.exit(0)
+    args = parser.parse_args()
     args.func(args)
 
 
