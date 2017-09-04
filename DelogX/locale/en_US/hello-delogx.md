@@ -12,29 +12,29 @@ Every `.md` file itself contain all metadata of the post or page:
 
 * Title: If the first line of the file is a level 1 header in Markdown syntax, this header is the title of the post or page, otherwise the title is same as the url.
 * Modification time: Just the modification time of the file. Pages have no modification time.
-* Main body: The texts exclude the title.
+* Main body: The texts of the file exclude the title.
 
 ### Hidden Content
 
-In UNIX-like systems, if the name of a file starts with a dot (`.`), this file is a hidden file. In DelogX, similar `.md` files will be hidden too — a post will not be shown in a post list, a page will not be shown in the navbar. But you can access these content by the valid URL.
+In UNIX-like systems, if the name of a file starts with a dot (`.`), this file is a hidden file. In DelogX, similar `.md` files will be hidden too — a post will not be shown in post lists, a page will not be shown in the navbar. But you can access these content by the valid URL.
 
 ### Order
 
-All posts are in reverse chronological order, and the newest post is at the top.
+All posts are in reverse chronological order, and the post just modified is at the top.
 
-Pages are usually sorted automatically by Python, however, you can specify the order by adding an integer sub-extension, such as `hello-world.1.md` and `demo.2.md`. Pages with a specific order have higher sort priority than others.
+Pages are usually sorted automatically by Python, however, you can specify the order by adding an integer sub-extension name, such as `hello-world.1.md` and `demo.2.md`. Pages with a specific order have higher sort priority than others.
 
 ### URL
 
 Every post or page has an unique URL. Each URL has two parts: prefix and file name. The prefix is like `/post`, you can change them in the config file.
 
-The file name part is the file name of the post or page, but exclude the extension name (`.md`), the dot prefix (`.`) and the specific order (such as `.1` and `.2`), because these are metadata. Then, this URL will be urlencoded.
+The file name part is the file name of the post or page, but exclude the extension name (`.md`), the dot prefix (`.`) and the specific order (such as `.1` and `.2`), because these stuff are metadata. In addition, this URL will be urlencoded.
 
 For example, the URL of page `.hidden-page.2.md` **may** be `/page/hidden-page`, and `http://yourblog.com/page/hidden-page` with a domain.
 
 ### Markdown
 
-DelogX support most standard Markdown syntax (difference see [python-markdown documentation]{: target="_blank"}), and following Extra syntax:
+DelogX support most of standard Markdown syntax (difference see [python-markdown documentation]{: target="_blank"}), and following Extra syntax:
 
 * Tables
 * Strike

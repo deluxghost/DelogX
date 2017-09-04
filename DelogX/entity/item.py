@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''DelogX.entity.item
 
-Define class and interface of a item.
+Define class and interface of an item.
 
 An item is a post or page.
 '''

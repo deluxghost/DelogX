@@ -50,6 +50,7 @@ body {
 
 a {
     background: transparent;
+    word-break: break-word;
 }
 
 a:focus {

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import os
 import sys
-
 from flask import Flask
 from DelogX import DelogX
 
