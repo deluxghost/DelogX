@@ -5,7 +5,6 @@ Define class and interface of an item.
 
 An item is a post or page.
 '''
-import codecs
 import os
 import re
 

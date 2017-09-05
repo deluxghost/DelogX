@@ -109,7 +109,7 @@ class Path(object):
 
             int: If non-empty line exists return the line number, otherwise 0.
         '''
-        for num, line in lines:
+        for num, line in enumerate(lines):
             if line.strip():
                 return num
         return 0

@@ -13,7 +13,7 @@ class TestPage(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         app = Flask(__name__)
         from DelogX import DelogX
         app_path = os.path.join(directory, 'test_app')
@@ -61,7 +61,7 @@ class TestPost(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         app = Flask(__name__)
         from DelogX import DelogX
         app_path = os.path.join(directory, 'test_app')
@@ -82,7 +82,7 @@ class TestConfig(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         filename = os.path.join(directory, 'test_app', 'config.json')
         from DelogX.utils.config import Config
         self.config = Config(filename)
@@ -141,7 +141,7 @@ class TestI18n(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         locale_dir = os.path.join(directory, 'test_app', 'locale')
         from DelogX.utils.i18n import I18n
         self.i18n = I18n(locale_dir, 'zh_CN')
@@ -161,7 +161,7 @@ class TestPlugin(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         app = Flask(__name__)
         from DelogX import DelogX
         app_path = os.path.join(directory, 'test_app')
@@ -181,7 +181,7 @@ class TestApp(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.realpath(__file__))
         delogx = os.path.dirname(os.path.dirname(directory))
-        sys.path.append(delogx)
+        sys.path.insert(0, delogx)
         app = Flask(__name__)
         from DelogX import DelogX
         app_path = os.path.join(directory, 'test_app')

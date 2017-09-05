@@ -3,7 +3,6 @@
 
 Class to load, save and modify json config files.
 '''
-
 import codecs
 import errno
 import json
