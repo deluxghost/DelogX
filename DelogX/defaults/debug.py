@@ -6,8 +6,6 @@
 
 Run `python debug.py` in your terminal, and open `http://127.0.0.1:8000`.
 '''
-from __future__ import unicode_literals
-
 import os
 import sys
 

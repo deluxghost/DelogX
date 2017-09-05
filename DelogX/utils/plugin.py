@@ -3,8 +3,6 @@
 
 Base class of any plugin and a plugin manager.
 '''
-from __future__ import unicode_literals
-
 import errno
 import importlib
 import os

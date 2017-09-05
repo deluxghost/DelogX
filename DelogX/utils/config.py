@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-'''DelogX.entity.config
+'''DelogX.utils.config
 
 Class to load, save and modify json config files.
 '''
-from __future__ import unicode_literals
 
 import codecs
 import errno

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''tests.test'''
-from __future__ import unicode_literals
-
 import os
 import sys
 import unittest

@@ -3,8 +3,6 @@
 
 Utils and functions about path.
 '''
-from __future__ import unicode_literals
-
 import codecs
 import os
 
@@ -98,3 +96,20 @@ class Path(object):
         with codecs.open(filename, encoding='utf-8') as some_file:
             lines = some_file.readlines()
         return lines
+
+    @classmethod
+    def get_first_line(cls, lines):
+        '''Get the line number of the first non-empty line in a list.
+
+        Args:
+
+            lines (list of str): A list of text.
+
+        Returns:
+
+            int: If non-empty line exists return the line number, otherwise 0.
+        '''
+        for num, line in lines:
+            if line.strip():
+                return num
+        return 0

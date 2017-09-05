@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-'''DelogX.entity.module
+'''DelogX.utils.module
 
 Class to check whether modules ready.
 '''
-from __future__ import unicode_literals
 
 
 class Module(object):

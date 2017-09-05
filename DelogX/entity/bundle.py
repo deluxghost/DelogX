@@ -5,8 +5,6 @@ Define class and interface of a bundle.
 
 A bundle is a set of items.
 '''
-from __future__ import unicode_literals
-
 import errno
 import os
 from collections import OrderedDict
@@ -56,16 +54,16 @@ class DelogXBundle(Bundle):
     '''
     directory = None
 
-    def __init__(self, app, app_path, directory):
+    def __init__(self, blog, app_path, directory):
         '''Initialize a DelogX bundle.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
             app_path (str): Absolute path of the blog application.
             directory (str): Name of items directory.
         '''
-        self.app = app
+        self.blog = blog
         self.bundle_list = OrderedDict()
         self.directory = Path.abs_path(app_path, directory)
         if not os.path.exists(self.directory):
@@ -159,18 +157,18 @@ class PostBundle(DelogXBundle):
     '''
     list_size = 10
 
-    def __init__(self, app, app_path, post_dir, list_size=10):
+    def __init__(self, blog, app_path, post_dir, list_size=10):
         '''Initialize a post bundle.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
             app_path (str): Absolute path of the blog application.
             post_dir (str): Name of posts directory.
             list_size (int): Count of posts per page, defaults 10.
         '''
         self.list_size = list_size
-        super(PostBundle, self).__init__(app, app_path, post_dir)
+        super(PostBundle, self).__init__(blog, app_path, post_dir)
 
     def update(self, filename):
         '''Update an post in bundle.
@@ -183,7 +181,7 @@ class PostBundle(DelogXBundle):
 
             bool: Whether the file is updated successfully.
         '''
-        post = Post(self.app, filename, self.directory)
+        post = Post(self.blog, filename, self.directory)
         if post.valid():
             self.bundle_list[filename] = post
             self.sort()
@@ -264,7 +262,7 @@ class PageBundle(DelogXBundle):
 
             bool: Whether the file is updated successfully.
         '''
-        page = Page(self.app, filename, self.directory)
+        page = Page(self.blog, filename, self.directory)
         if page.valid():
             self.bundle_list[filename] = page
             self.sort()

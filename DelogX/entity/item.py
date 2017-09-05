@@ -5,8 +5,6 @@ Define class and interface of an item.
 
 An item is a post or page.
 '''
-from __future__ import unicode_literals
-
 import codecs
 import os
 import re
@@ -35,18 +33,18 @@ class Item(object):
     content = None
     url = None
     title = None
-    title_mode = 0
+    title_mode = 0  # TODO: magic value
 
-    def __init__(self, app, filename, path):
+    def __init__(self, blog, filename, path):
         '''Initialize and load an item.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
             filename (str): Name of this item file.
             path (str): Name of items directory.
         '''
-        self.app = app
+        self.blog = blog
         self.filename = filename
         self.path = os.path.join(path, filename)
         self.update()
@@ -78,9 +76,10 @@ class Item(object):
             self.url = self.url[1:]
         atx_re = re.compile(r'^\s*#\s*([^#]+)\s*#*\s*$')
         setext_re = re.compile(r'^\s*=+\s*$')
-        with codecs.open(self.path, encoding='utf-8') as item_file:
-            line1 = item_file.readline()
-            line2 = item_file.readline()
+        lines = Path.read_file(self.path)
+        first_line = Path.get_first_line(lines)
+        line1 = lines[first_line] if first_line < len(lines) else ''
+        line2 = lines[first_line + 1] if first_line + 1 < len(lines) else ''
         line1 = line1.strip('\n').strip('\r')
         line2 = line2.strip('\n').strip('\r')
         atx_match = atx_re.match(line1)
@@ -105,11 +104,11 @@ class Item(object):
         elif self.title_mode == 2:
             lines = lines[2:]
         self.content = ''.join(lines)
-        self.content = Markdown.markdown(self.content, self.app.markdown_ext)
+        self.content = Markdown.markdown(self.content, self.blog.markdown_ext)
 
 
 class Post(Item):
-    '''Form as a post.
+    '''A post.
 
     Attributes:
 
@@ -125,7 +124,7 @@ class Post(Item):
 
 
 class Page(Item):
-    '''Form as a page.
+    '''A page.
 
     Attributes:
 

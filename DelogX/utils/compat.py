@@ -3,8 +3,6 @@
 
 Utils about compatibility of OS and Python.
 '''
-from __future__ import unicode_literals
-
 import codecs
 import os
 import platform

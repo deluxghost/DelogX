@@ -3,8 +3,6 @@
 
 Utils of markdown parser.
 '''
-from __future__ import unicode_literals
-
 import markdown
 from markdown.extensions import Extension
 

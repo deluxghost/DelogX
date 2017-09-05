@@ -3,8 +3,6 @@
 
 The watchdog handler of DelogX bundles.
 '''
-from __future__ import unicode_literals
-
 import os
 
 from watchdog.events import PatternMatchingEventHandler
