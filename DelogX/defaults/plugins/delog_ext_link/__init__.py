@@ -4,7 +4,7 @@ import re
 from DelogX.utils.plugin import Plugin
 
 
-class ExternalLink(Plugin):
+class DelogExtLink(Plugin):
 
     def run(self):
         self.manager.add_filter('dx_page', self.load_link)

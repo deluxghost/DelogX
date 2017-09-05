@@ -4,7 +4,7 @@ from markdown.extensions import Extension
 from DelogX.utils.plugin import Plugin
 
 
-class ExternalLink(Plugin):
+class DelogMdDel(Plugin):
 
     def run(self):
         self.manager.add_filter('dx_page', self.load_link)
