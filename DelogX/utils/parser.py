@@ -25,7 +25,7 @@ class Markdown(object):
         ext_list = [
             'markdown.extensions.attr_list',
             'markdown.extensions.tables',
-            'markdown.extensions.fenced_code',
+            'markdown.extensions.fenced_code'
         ]
         if exts and isinstance(exts, list):
             ext_list.extend(exts)

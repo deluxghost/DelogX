@@ -218,7 +218,7 @@ header {
     text-decoration: none;
     font-size: 42px;
     font-family: "Droid Serif",Georgia,"Times New Roman",STHeiti,serif;
-    transition: color ease-out .4s;
+    transition: color ease-out .3s;
 }
 
 .site-name a:hover {
@@ -251,7 +251,7 @@ header {
 .nav-menu a:visited {
     color: #66ccff;
     text-decoration: none;
-    transition: all .4s;
+    transition: all .3s;
 }
 
 .nav-menu a:hover {
@@ -281,7 +281,7 @@ article .page-title a:link,
 article .page-title a:visited {
     color: #0070b9;
     text-decoration: none;
-    transition: color .4s;
+    transition: color .3s;
 }
 
 article .page-title {

@@ -2,6 +2,7 @@
 '''The command line manager of DelogX.'''
 import argparse
 import os
+import platform
 import shutil
 import sys
 
@@ -55,13 +56,14 @@ def init(init_args):
     deploy_dir = os.path.join(defaults, 'deploy')
     deploys = list()
     if init_args.apache:
-        deploys.append('apache2.wsgi')
+        deploys.append('mod_wsgi.wsgi')
+        if platform.system() == 'Windows':
+            deploys.append('apache2_win.conf')
+        else:
+            deploys.append('apache2.conf')
     if init_args.nginx:
         deploys.append('uwsgi.py')
-    if init_args.tornado:
-        deploys.append('tornado_wsgi.py')
-    if init_args.gevent:
-        deploys.append('gevent_wsgi.py')
+        deploys.append('nginx.conf')
     for filename in deploys:
         deploy = os.path.join(deploy_dir, filename)
         deploy_dst = os.path.join(cwd, filename)

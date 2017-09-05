@@ -53,8 +53,9 @@ class DelogX(object):
         self.runtime = runtime
         self.markdown_ext = list()
         self.init_runtime()
-        self.init_route()
         self.init_plugins()
+        self.init_bundles()
+        self.init_route()
         self.update_header()
 
     def init_runtime(self):
@@ -80,13 +81,21 @@ class DelogX(object):
             runtime.let(key, Path.abs_path(app_path, conf(key)))
         for key in init_url_list:
             runtime.let(key, Path.format_url(conf(key)))
-        post_dir = runtime.get('directory.post')
-        page_dir = runtime.get('directory.page')
         themes_dir = runtime.get('directory.themes')
         theme = conf('local.theme')
         theme = 'default' if not theme else theme
         theme_path = os.path.join(themes_dir, theme)
         self.framework.template_folder = theme_path
+        self.i18n = I18n(
+            Path.format_url(module_path, 'locale'), conf('local.locale'))
+
+    def init_bundles(self):
+        '''Initialize bundles of posts and pages.'''
+        conf = self.default_conf
+        runtime = self.runtime
+        app_path = runtime.get('path.app')
+        post_dir = runtime.get('directory.post')
+        page_dir = runtime.get('directory.page')
         self.post_bundle = PostBundle(
             self, app_path, post_dir, conf('local.list_size'))
         self.page_bundle = PageBundle(self, app_path, page_dir)
@@ -98,8 +107,6 @@ class DelogX(object):
         self.observer.schedule(post_watch, post_dir)
         self.observer.schedule(page_watch, page_dir)
         self.observer.start()
-        self.i18n = I18n(
-            Path.format_url(module_path, 'locale'), conf('local.locale'))
 
     def init_route(self):
         '''Initialize URL routes of DelogX.'''
