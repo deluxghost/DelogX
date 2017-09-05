@@ -41,7 +41,7 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'Framework :: Flask',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
         'Natural Language :: English',
         'Natural Language :: Chinese (Simplified)',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

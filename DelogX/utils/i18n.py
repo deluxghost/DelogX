@@ -6,7 +6,6 @@ Utils about i18n, an i18n manager.
 import os
 from string import Formatter
 
-from DelogX.utils.compat import Compat
 from DelogX.utils.config import Config
 
 
@@ -18,20 +17,12 @@ class I18nFormatter(Formatter):
 
     def get_value(self, key, args, kwargs):
         default = self.default
-        if Compat.version() == 2:
-            if isinstance(key, int) or isinstance(key, long):
-                return args[key] if -len(args) <= key < len(args) else default
-            elif isinstance(key, str) or isinstance(key, unicode):
-                return kwargs.get(key, self.default)
-            else:
-                super(I18nFormatter, self).get_value(key, args, kwargs)
+        if isinstance(key, int):
+            return args[key] if -len(args) <= key < len(args) else default
+        elif isinstance(key, str):
+            return kwargs.get(key, self.default)
         else:
-            if isinstance(key, int):
-                return args[key] if -len(args) <= key < len(args) else default
-            elif isinstance(key, str):
-                return kwargs.get(key, self.default)
-            else:
-                super(I18nFormatter, self).get_value(key, args, kwargs)
+            super(I18nFormatter, self).get_value(key, args, kwargs)
 
 
 class I18n(object):

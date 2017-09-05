@@ -3,71 +3,10 @@
 
 Utils about compatibility of OS and Python.
 '''
-import codecs
-import os
-import platform
-import sys
 
 
 class Compat(object):
     '''Compatibility utils.'''
-
-    @classmethod
-    def version(cls):
-        '''Return the major version of Python.
-
-        Returns:
-
-            int: Major version of Python.
-        '''
-        return sys.version_info.major
-
-    @classmethod
-    def sys(cls):
-        '''Return the name of the operating system.
-
-        Returns:
-
-            str: Name of the operating system.
-        '''
-        return platform.system()
-
-    @classmethod
-    def is_wsl(cls):
-        '''Whether DelogX is running on WSL (Windows Subsystem for Linux).'''
-        def _read_file(filename):
-            if not os.path.isfile(filename):
-                return ''
-            with codecs.open(filename, encoding='utf-8') as some_file:
-                lines = some_file.readlines()
-            return ''.join(lines)
-        if Compat.sys() != 'Linux':
-            return False
-        version = _read_file('/proc/version')
-        osrelease = _read_file('/proc/sys/kernel/osrelease')
-        if 'Microsoft' in version or 'Microsoft' in osrelease:
-            return True
-        return False
-
-    @classmethod
-    def unicode_convert(cls, string, to_byte=True):
-        '''Convert a string to unicode or byte.
-
-        Args:
-
-            string (str): String needs to convert.
-            to_byte (bool): Whether convert to byte, defaults True.
-
-        Returns:
-
-            str: Converted string.
-        '''
-        if Compat.version() < 3:
-            if to_byte:
-                return string.encode('utf-8')
-            else:
-                return string.decode('utf-8')
-        return string
 
     @classmethod
     def cmp_to_key(cls):

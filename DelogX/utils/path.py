@@ -6,8 +6,6 @@ Utils and functions about path.
 import codecs
 import os
 
-from DelogX.utils.compat import Compat
-
 
 class Path(object):
     '''Some useful path and URL utils and functions.'''
@@ -38,11 +36,8 @@ class Path(object):
 
             str: Encoded URL.
         '''
-        if Compat.version() < 3:
-            import urllib
-        else:
-            import urllib.parse as urllib
-        return urllib.quote(Compat.unicode_convert(url))
+        import urllib.parse
+        return urllib.parse.quote(url)
 
     @classmethod
     def urldecode(cls, url):
@@ -56,11 +51,8 @@ class Path(object):
 
             str: Decoded URL.
         '''
-        if Compat.version() < 3:
-            import urllib
-        else:
-            import urllib.parse as urllib
-        return urllib.unquote(Compat.unicode_convert(url))
+        import urllib.parse
+        return urllib.parse.unquote(url)
 
     @classmethod
     def abs_path(cls, prefix, path):

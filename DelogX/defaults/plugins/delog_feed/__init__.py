@@ -27,11 +27,11 @@ class DelogFeed(Plugin):
         self.feed_url = Path.format_url(self.feed_url)
         if not self.feed_url.endswith('/'):
             self.feed_url += '/'
-        self.app.add_url_rule(self.feed_url, 'delog_feed', self.make_feed)
+        self.blog.add_url_rule(self.feed_url, 'delog_feed', self.make_feed)
         self.manager.add_filter('dx_render', self.add_link)
 
     def add_link(self, render):
-        site_name = self.app.default_conf('site.name')
+        site_name = self.blog.default_conf('site.name')
         copy = render.lower()
         search = '<head>'
         tag = (
@@ -46,9 +46,9 @@ class DelogFeed(Plugin):
         return render
 
     def make_feed(self):
-        site_name = self.app.default_conf('site.name')
+        site_name = self.blog.default_conf('site.name')
         feed = AtomFeed(site_name, feed_url=request.url, url=request.url_root)
-        posts = self.app.post_bundle.get_list(1, self.feed_limit)
+        posts = self.blog.post_bundle.get_list(1, self.feed_limit)
         for post in posts:
             post = self.manager.do_filter('dx_post', post)
             ext_url = request.url_root

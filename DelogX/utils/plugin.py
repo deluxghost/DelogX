@@ -17,25 +17,25 @@ class Plugin(object):
 
     Attributes:
 
-        app (DelogX): DelogX object.
+        blog (DelogX): DelogX object.
         manager (PluginManager): PluginManager object of DelogX.
         name (str): Name of this plugin and its directory.
         workspace (str): Path of the directory of this plugin.
     '''
-    app = None
+    blog = None
     manager = None
     name = 'Plugin'
     workspace = None
 
-    def __init__(self, app):
+    def __init__(self, blog):
         '''Iniitialize plugin.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
         '''
-        self.app = app
-        self.manager = app.plugin_manager
+        self.blog = blog
+        self.manager = blog.plugin_manager
 
     def run(self):
         '''Method to call when this plugin is enabled.'''
@@ -99,15 +99,15 @@ class PluginManager(object):
     filters = None
     actions = None
 
-    def __init__(self, app, directory):
+    def __init__(self, blog, directory):
         '''Initialize plugin manager.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
             directory (str): Name of the plugins directory.
         '''
-        self.app = app
+        self.blog = blog
         self.plugins = dict()
         self.filters = dict()
         self.actions = dict()
@@ -167,7 +167,7 @@ class PluginManager(object):
         module_name = '.'.join(module_name)
         class_name = ''.join(entry_name.split('.')[-1:])
         module = importlib.import_module(module_name)
-        entry = getattr(module, class_name)(self.app)
+        entry = getattr(module, class_name)(self.blog)
         entry.name = plugin_name
         entry.workspace = plugin_dir
         self.plugins[plugin_name] = {

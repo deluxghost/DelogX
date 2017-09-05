@@ -17,19 +17,19 @@ class Watch(PatternMatchingEventHandler):
     '''
     bundle = None
 
-    def __init__(self, app, bundle, patterns, is_page=False):
+    def __init__(self, blog, bundle, patterns, is_page=False):
         '''Initialize changing event handler.
 
         Args:
 
-            app (DelogX): DelogX object.
+            blog (DelogX): DelogX object.
             bundle (Bundle): Bundle object relates to the watched directory.
             patterns (list of str): Patterns to allow matching event paths.
             is_page (bool): Whether the bundle is a PageBundle.
         '''
         super(Watch, self).__init__(
             patterns=patterns, ignore_directories=True)
-        self.app = app
+        self.blog = blog
         self.bundle = bundle
         self.is_page = is_page
 
@@ -57,7 +57,7 @@ class Watch(PatternMatchingEventHandler):
         '''
         self.bundle.update(filename)
         if self.is_page:
-            self.app.update_header()
+            self.blog.update_header()
 
     def do_remove(self, filename):
         '''Remove a file in bundle.
@@ -70,4 +70,4 @@ class Watch(PatternMatchingEventHandler):
         '''
         self.bundle.remove(filename)
         if self.is_page:
-            self.app.update_header()
+            self.blog.update_header()

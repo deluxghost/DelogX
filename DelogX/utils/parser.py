@@ -4,7 +4,6 @@
 Utils of markdown parser.
 '''
 import markdown
-from markdown.extensions import Extension
 
 
 class Markdown(object):
@@ -27,7 +26,6 @@ class Markdown(object):
             'markdown.extensions.attr_list',
             'markdown.extensions.tables',
             'markdown.extensions.fenced_code',
-            DelExtension()
         ]
         if exts and isinstance(exts, list):
             ext_list.extend(exts)
@@ -39,14 +37,3 @@ class Markdown(object):
             tab_length=4,
             extensions=ext_list
         )
-
-
-class DelExtension(Extension):
-    '''Extension to provide `<del>` tag support.'''
-
-    def extendMarkdown(self, md, md_globals):
-        '''Add `<del>` tag support to markdown.'''
-        from markdown.inlinepatterns import SimpleTagPattern
-        md_del_re = r'(\~\~)(.+?)(\~\~)'
-        md.inlinePatterns.add(
-            'del', SimpleTagPattern(md_del_re, 'del'), '<not_strong')

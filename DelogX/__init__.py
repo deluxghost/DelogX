@@ -8,7 +8,6 @@ from watchdog.observers import Observer
 from watchdog.observers.polling import PollingObserver
 
 from DelogX.entity.bundle import PostBundle, PageBundle
-from DelogX.utils.compat import Compat
 from DelogX.utils.config import Config
 from DelogX.utils.i18n import I18n
 from DelogX.utils.path import Path
@@ -94,7 +93,6 @@ class DelogX(object):
         post_watch = Watch(self, self.post_bundle, ['*.md'])
         page_watch = Watch(self, self.page_bundle, ['*.md'], is_page=True)
         watch_polling = conf('local.watch_polling')
-        watch_polling = True if Compat.is_wsl() else watch_polling
         self.observer = PollingObserver() if watch_polling else Observer()
         self.observer.setDaemon(True)
         self.observer.schedule(post_watch, post_dir)
@@ -309,11 +307,8 @@ class DelogX(object):
         time_format = conf('local.time_format')
         post.cooked_url = Path.format_url(post_url, Path.urlencode(post.url))
         post.cooked_time = time.strftime(
-            Compat.unicode_convert(time_format),
-            time.localtime(post.time))
-        post.cooked_time = Compat.unicode_convert(
-            post.cooked_time,
-            to_byte=False)
+            time_format, time.localtime(post.time))
+        post.cooked_time = post.cooked_time
         return post
 
     def get_static(self, statics):
