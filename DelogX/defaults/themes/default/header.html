@@ -3,16 +3,16 @@
     <div class="site-subname">{{ _c('site.subname') }}</div>
     <div>
         <nav class="nav-menu">
-            <ul>
-                <li><a href="/">{{ _g('Home') }}</a></li>
+            <div>
+                <span><a href="/">{{ _g('Home') }}</a></span>
                 {%- for nav in app.header %}
                 {% if nav.link %}
-                | <li><a href="{{ nav.link }}" target="{{ nav.target }}">{{ nav.title.strip('\n') }}</a></li>
+                | <span><a href="{{ nav.link }}" target="{{ nav.target }}">{{ nav.title.strip('\n') }}</a></span>
                 {% else %}
-                | <li><a href="{{ nav.cooked_url }}">{{ nav.title.strip('\n') }}</a></li>
+                | <span><a href="{{ nav.cooked_url }}">{{ nav.title.strip('\n') }}</a></span>
                 {% endif %}
                 {%- endfor %}
-            </ul>
+            </div>
         </nav>
     </div>
 </header>

@@ -232,14 +232,15 @@ header {
 
 .nav-menu {
     color: #ebebeb;
+    margin-top: 16px;
 }
 
-.nav-menu ul {
+.nav-menu div {
     padding: 0;
     text-align: center;
 }
 
-.nav-menu li {
+.nav-menu span {
     position: relative;
     display: inline-block;
     padding: 0 7px;
