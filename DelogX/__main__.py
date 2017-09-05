@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 '''The command line manager of DelogX.'''
-from __future__ import print_function, unicode_literals
-
 import argparse
 import os
 import shutil
@@ -123,12 +121,6 @@ def main():
     init_parser.add_argument(
         '--uwsgi', '--nginx',
         dest='nginx', help='deploy on uWSGI or Nginx',
-        action='store_true')
-    init_parser.add_argument(
-        '--tornado', help='deploy on Tornado',
-        action='store_true')
-    init_parser.add_argument(
-        '--gevent', help='deploy on Gevent',
         action='store_true')
     init_parser.set_defaults(func=init)
     if len(sys.argv) <= 1:
