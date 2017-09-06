@@ -4,7 +4,7 @@ Welcome to DelogX. This is a lite, dynamic and Markdown based blog framework, wr
 
 ## Getting Started
 
-DelogX manage posts and pages in file system，every post or page is referred to a regular Markdown file. Conversely, every valid Markdown file can be considered as a post or page.
+DelogX manage posts and pages in file system, every post or page is referred to a regular Markdown file. Conversely, every valid Markdown file can be considered as a post or page.
 
 ### Metadata
 

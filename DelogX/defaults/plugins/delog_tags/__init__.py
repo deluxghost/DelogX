@@ -19,14 +19,27 @@ class DelogTags(Plugin):
         self.tags_url = Path.format_url(self.tags_url)
         tag_rule = Path.format_url(self.tags_url, '<tag_id>/')
         self.blog.add_url_rule(tag_rule, 'delog_tag', self.make_tag)
-        self.manager.add_filter('dx_post', self.load_tags)
+        self.manager.add_action('dx_post_update', self.load_tags)
 
-    def load_tags(self, post):
-        # TODO
+    def load_tags(self, *args, **kwargs):
+        post = kwargs.get('post')
         if not post:
-            return None
+            return
         post.tags = list()
-        return post
+        title = post.title
+        title_split = title.split('::', 1)
+        if title_split:
+            post.title = title_split[0].strip()
+            tags = ''.join(title_split[1:]).split(',')
+            post.tags = list(filter(None, list(map(str.strip, tags))))
+            tags_link = list()
+            tags_html = '<div class="post-tags">{0}</div>'
+            for tag in post.tags:
+                tags_link.append('<a href="{0}">{1}</a>'.format(
+                    Path.format_url(self.tags_url, Path.urlencode(tag)), tag))
+            if tags_link:
+                tags_html = tags_html.format(' '.join(tags_link))
+                post.content = tags_html + post.content
 
     def make_tag(self, tag_id):
         # TODO

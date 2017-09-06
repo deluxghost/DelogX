@@ -10,6 +10,7 @@ import re
 
 from DelogX.utils.parser import Markdown
 from DelogX.utils.path import Path
+from DelogX.utils.plugin import PluginManager
 
 
 class Item(object):
@@ -25,6 +26,7 @@ class Item(object):
         cooked_url (str): Encoded URL of this item.
         title (str): Title of this item.
         title_mode (int): Type of title, 0 is nil, 1 is Atx, 2 is Setext.
+        plugin_manager (PluginManager): Plugin manager of DelogX.
     '''
     filename = None
     path = None
@@ -33,6 +35,7 @@ class Item(object):
     url = None
     title = None
     title_mode = 0  # TODO: magic value
+    plugin_manager = None
 
     def __init__(self, blog, filename, path):
         '''Initialize and load an item.
@@ -46,6 +49,7 @@ class Item(object):
         self.blog = blog
         self.filename = filename
         self.path = os.path.join(path, filename)
+        self.plugin_manager = blog.plugin_manager
         self.update()
 
     def __str__(self):
@@ -116,6 +120,11 @@ class Post(Item):
     '''
     time = None
 
+    def update(self):
+        '''Load the meta and content of this post.'''
+        super(Post, self).update()
+        self.plugin_manager.do_action('dx_post_update', post=self)
+
     def load_meta(self):
         '''Load the meta of this post, include timestamp `time`.'''
         super(Post, self).load_meta()
@@ -130,6 +139,11 @@ class Page(Item):
         sort (int): Customize sort order of this page.
     '''
     sort = None
+
+    def update(self):
+        '''Load the meta and content of this page.'''
+        super(Page, self).update()
+        self.plugin_manager.do_action('dx_page_update', page=self)
 
     def load_meta(self):
         '''Load the meta of this page, include sort order `sort`.'''
