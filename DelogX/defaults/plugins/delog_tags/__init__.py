@@ -18,7 +18,10 @@ class DelogTags(Plugin):
             self.tags_url = '/tag'
         self.tags_url = Path.format_url(self.tags_url)
         tag_rule = Path.format_url(self.tags_url, '<tag_id>/')
+        tag_list_rule = Path.format_url(tag_rule, '<int:number>/')
         self.blog.add_url_rule(tag_rule, 'delog_tag', self.make_tag)
+        self.blog.add_url_rule(
+            tag_list_rule, 'delog_tag_list', self.make_tag_list)
         self.manager.add_action('dx_post_update', self.load_tags)
 
     def load_tags(self, *args, **kwargs):
@@ -42,5 +45,8 @@ class DelogTags(Plugin):
                 post.content = tags_html + post.content
 
     def make_tag(self, tag_id):
+        return self.make_tag_list(tag_id, 1)
+
+    def make_tag_list(self, tag_id, number):
         # TODO
         pass
