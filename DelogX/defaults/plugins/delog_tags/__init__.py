@@ -30,7 +30,7 @@ class DelogTags(Plugin):
             return
         post.tags = list()
         title = post.title
-        title_split = title.split('::', 1)
+        title_split = list(filter(None, title.split('::', 1)))
         if title_split:
             post.title = title_split[0].strip()
             tags = ''.join(title_split[1:]).split(',')
@@ -48,5 +48,12 @@ class DelogTags(Plugin):
         return self.make_tag_list(tag_id, 1)
 
     def make_tag_list(self, tag_id, number):
-        # TODO
-        pass
+        tag_id = Path.urldecode(tag_id)
+        conf = self.blog.default_conf
+        runtime = self.blog.runtime.get
+        list_size = conf('local.list_size')
+        bundle = self.blog.post_bundle.bundle_list
+        tagged = [
+            x for x in bundle.values()
+            if not x.hidden and tag_id in x.tags
+        ]

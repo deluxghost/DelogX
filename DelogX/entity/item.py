@@ -10,7 +10,6 @@ import re
 
 from DelogX.utils.parser import Markdown
 from DelogX.utils.path import Path
-from DelogX.utils.plugin import PluginManager
 
 
 class Item(object):

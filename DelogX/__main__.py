@@ -109,19 +109,19 @@ def deploy(deploy_args):
     srv_proxy_pass = ''
     srv_user = ''
     while not srv_names:
-        print('Input your server names (split by space):')
+        print('Your server names (split by space):')
         srv_names = input('> ')
     if platform.system() != 'Windows':
         import getpass
         srv_user = getpass.getuser()
         if deploy_args.apache:
             while not srv_appname:
-                print('Input your application names for mod_wsgi:')
+                print('Your application names for mod_wsgi:')
                 srv_appname = input('> ')
     srv_path = cwd
     if deploy_args.nginx:
         while not srv_proxy_pass:
-            print('Input your proxy pass address (e.g. http://127.0.0.1:8000):')
+            print('Your proxy pass address (e.g. http://127.0.0.1:8000):')
             srv_proxy_pass = input('> ')
     srv_a2_name = ''
     srv_a2_alias = ''
