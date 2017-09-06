@@ -52,23 +52,6 @@ def init(init_args):
         print('Choose Language({0}):'.format(','.join(locales)))
         locale = input('> ')
     copytree(defaults, cwd)
-    print('Creating deployment scripts')
-    deploy_dir = os.path.join(defaults, 'deploy')
-    deploys = list()
-    if init_args.apache:
-        deploys.append('mod_wsgi.wsgi')
-        if platform.system() == 'Windows':
-            deploys.append('apache2_win.conf')
-        else:
-            deploys.append('apache2.conf')
-    if init_args.nginx:
-        deploys.append('uwsgi.py')
-        deploys.append('nginx.conf')
-    for filename in deploys:
-        deploy = os.path.join(deploy_dir, filename)
-        deploy_dst = os.path.join(cwd, filename)
-        print(' Creating {0}'.format(deploy_dst))
-        shutil.copyfile(deploy, deploy_dst)
     print('Setting language', locale)
     config = Config(os.path.join(cwd, 'config.json'))
     config.let('local.locale', locale)
@@ -97,6 +80,79 @@ def init(init_args):
         os.path.join(locale_dir, locale, 'demo.md'), page_path)
 
 
+def deploy(deploy_args):
+    '''Create deployment files.'''
+    module_path = os.path.dirname(os.path.realpath(__file__))
+    sys.path.append(os.path.dirname(module_path))
+    cwd = os.getcwd()
+    defaults = os.path.join(module_path, 'defaults')
+    deploy_dir = os.path.join(defaults, 'deploy')
+    deploys = list()
+    if deploy_args.apache:
+        deploys.append('mod_wsgi.wsgi')
+        if platform.system() == 'Windows':
+            deploys.append('apache2_win.conf')
+        else:
+            deploys.append('apache2.conf')
+    if deploy_args.wsgi:
+        deploys.append('uwsgi.py')
+    if deploy_args.nginx:
+        deploys.append('nginx.conf')
+    if not deploys:
+        print(
+            '''You haven't specific any deployment method,\n'''
+            '''use `delogx deploy --help' to get further information.'''
+        )
+        return
+    srv_names = ''
+    srv_appname = ''
+    srv_proxy_pass = ''
+    srv_user = ''
+    while not srv_names:
+        print('Input your server names (split by space):')
+        srv_names = input('> ')
+    if platform.system() != 'Windows':
+        import getpass
+        srv_user = getpass.getuser()
+        if deploy_args.apache:
+            while not srv_appname:
+                print('Input your application names for mod_wsgi:')
+                srv_appname = input('> ')
+    srv_path = cwd
+    if deploy_args.nginx:
+        while not srv_proxy_pass:
+            print('Input your proxy pass address (e.g. http://127.0.0.1:8000):')
+            srv_proxy_pass = input('> ')
+    srv_a2_name = ''
+    srv_a2_alias = ''
+    if srv_names.split():
+        srv_a2_name = 'ServerName ' + srv_names.split()[0]
+    if len(srv_names.split()) > 1:
+        srv_a2_alias = 'ServerAlias ' + ' '.join(srv_names.split()[1:])
+    print('Applying variables')
+    replacements = {
+        '{{:server_name:}}': srv_names,
+        '{{:a2server_name:}}': srv_a2_name,
+        '{{:a2server_alias:}}': srv_a2_alias,
+        '{{:application:}}': srv_appname,
+        '{{:path:}}': srv_path,
+        '{{:pathsep:}}': os.path.sep,
+        '{{:user:}}': srv_user,
+        '{{:group:}}': srv_user,
+        '{{:proxy_pass:}}': srv_proxy_pass
+    }
+    print('Creating deployment files')
+    for filename in deploys:
+        deploy_src = os.path.join(deploy_dir, filename)
+        deploy_dst = os.path.join(cwd, filename)
+        print(' Creating {0}'.format(deploy_dst))
+        with open(deploy_src) as infile, open(deploy_dst, 'w') as outfile:
+            for line in infile:
+                for src, target in replacements.items():
+                    line = line.replace(src, target)
+                outfile.write(line)
+
+
 def main():
     '''Main function of the manager.'''
     module_path = os.path.dirname(os.path.realpath(__file__))
@@ -113,18 +169,23 @@ def main():
         metavar='sub-command', help='description')
     init_parser = subparsers.add_parser(
         'init', help='create DelogX blog application at current directory')
+    deploy_parser = subparsers.add_parser(
+        'deploy', help='create DelogX blog deployment files')
     init_parser.add_argument(
         '-f', '--force', help='force creation of the blog',
         action='store_true')
-    init_parser.add_argument(
+    deploy_parser.add_argument(
         '--mod-wsgi', '--apache2',
         dest='apache', help='deploy on Apache 2 (mod_wsgi)',
         action='store_true')
-    init_parser.add_argument(
-        '--uwsgi', '--nginx',
-        dest='nginx', help='deploy on uWSGI or Nginx',
+    deploy_parser.add_argument(
+        '--wsgi', dest='wsgi', help='deploy in a WSGI container',
+        action='store_true')
+    deploy_parser.add_argument(
+        '--nginx', dest='nginx', help='deploy behind Nginx proxy',
         action='store_true')
     init_parser.set_defaults(func=init)
+    deploy_parser.set_defaults(func=deploy)
     if len(sys.argv) <= 1:
         parser.print_help()
         parser.exit(0)
