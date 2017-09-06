@@ -3,7 +3,7 @@ DelogX is a lite, tiny, micro and dynamic Markdown based blog framework, written
 Features
 --------
 
--  Lite, tiny, micro, little and small.
+-  Small, little, lite, tiny and micro.
 -  Easy to install and deploy.
 -  Write and publish with Markdown.
 -  Manage articles in one directory.
@@ -11,7 +11,7 @@ Features
 -  Compatible with Windows, macOS, Linux and even WSL or Android.
 -  Configure everything, including localization.
 -  Customize your blog with plugins and themes.
--  Deploy on Apache, Nginx, uWSGI, Tornado, Gevent or just built-in server.
+-  Deploy on Apache, Nginx, standalone WSGI containers or just built-in server.
 
 Installation
 ------------
@@ -20,13 +20,13 @@ Install DelogX with pip:
 
 .. code:: shell
 
-    pip install DelogX
+    pip3 install DelogX
 
 You may need root permissions:
 
 .. code:: shell
 
-    sudo pip install DelogX
+    sudo pip3 install DelogX
 
 Getting Started
 ---------------
@@ -50,7 +50,7 @@ When the process is complete, run:
 
 .. code:: shell
 
-    python debug.py
+    python3 debug.py
 
 and visit "http://127.0.0.1:8000" to test if everything is ok.
 
