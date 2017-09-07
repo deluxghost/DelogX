@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import math
 import os
 
+from flask import abort
+
 from DelogX.utils.config import Config
+from DelogX.utils.i18n import I18n
 from DelogX.utils.path import Path
 from DelogX.utils.plugin import Plugin
 
@@ -12,6 +16,7 @@ class DelogTags(Plugin):
     tags_url = None
 
     def run(self):
+        conf = self.blog.default_conf
         self.config = Config(os.path.join(self.workspace, 'config.json'))
         self.tags_url = self.config.get('delog_tags.url')
         if not self.tags_url:
@@ -23,6 +28,8 @@ class DelogTags(Plugin):
         self.blog.add_url_rule(
             tag_list_rule, 'delog_tag_list', self.make_tag_list)
         self.manager.add_action('dx_post_update', self.load_tags)
+        self.i18n = I18n(
+            Path.format_url(self.workspace, 'locale'), conf('local.locale'))
 
     def load_tags(self, *args, **kwargs):
         post = kwargs.get('post')
@@ -50,10 +57,32 @@ class DelogTags(Plugin):
     def make_tag_list(self, tag_id, number):
         tag_id = Path.urldecode(tag_id)
         conf = self.blog.default_conf
-        runtime = self.blog.runtime.get
         list_size = conf('local.list_size')
         bundle = self.blog.post_bundle.bundle_list
         tagged = [
-            x for x in bundle.values()
-            if not x.hidden and tag_id in x.tags
+            post for post in bundle.values()
+            if not post.hidden and tag_id in post.tags
         ]
+        list_count = int(math.ceil(float(len(tagged)) / float(list_size)))
+        if not 0 < number <= list_count:
+            abort(404)
+        if tagged is None or list_count < 1:
+            abort(404)
+        post_list = tagged[
+            list_size * (number - 1):list_size * number
+        ]
+        for post in post_list:
+            post = self.blog.plugin_manager.do_filter('dx_post', post)
+        prev_page = next_page = True
+        if number == 1:
+            prev_page = False
+        if number == list_count:
+            next_page = False
+        list_url = Path.format_url(self.tags_url, tag_id)
+        url = list_url if list_url.endswith('/') else list_url + '/'
+        web_title = self.i18n.get('{0} - Page {1}', tag_id, number)
+        return self.blog.get_render(
+            'list.html', posts=post_list,
+            list_id=number, list_url=url,
+            prev_page=prev_page, next_page=next_page,
+            web_title=web_title)

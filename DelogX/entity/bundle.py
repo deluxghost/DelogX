@@ -212,7 +212,9 @@ class PostBundle(DelogXBundle):
             post_count = len([
                 post for post in self.bundle_list.values() if not post.hidden
             ])
-        return int(math.ceil(float(post_count) / float(list_size)))
+        list_count = int(math.ceil(float(post_count) / float(list_size)))
+        list_count = 1 if list_count == 0 else list_count
+        return list_count
 
     def get_list(self, number=0, list_size=None):
         '''Return a list of multiple posts.
@@ -235,6 +237,7 @@ class PostBundle(DelogXBundle):
                 post for post in self.bundle_list.values() if not post.hidden
             ]
             list_count = self.get_list_count(len(post_list), list_size)
+            list_count = 1 if list_count == 0 else list_count
             if not 0 < number <= list_count:
                 return None
             if post_list and list_count > 0:
