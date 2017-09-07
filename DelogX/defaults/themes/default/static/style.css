@@ -459,7 +459,7 @@ article hr {
 article pre {
     display: block;
     padding: 4px 6px;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 pre code{
@@ -471,6 +471,7 @@ article pre,
 article code {
     border: solid 1px #eaeaea;
     background-color: #efecf4;
+    border-radius: 2px;
 }
 
 .next-page a,
