@@ -14,10 +14,13 @@ class DelogTags(Plugin):
 
     config = None
     tags_url = None
+    i18n = None
 
     def run(self):
         conf = self.blog.default_conf
         self.config = Config(os.path.join(self.workspace, 'config.json'))
+        self.i18n = I18n(
+            Path.format_url(self.workspace, 'locale'), conf('local.locale'))
         self.tags_url = self.config.get('delog_tags.url')
         if not self.tags_url:
             self.tags_url = '/tag'
@@ -28,8 +31,6 @@ class DelogTags(Plugin):
         self.blog.add_url_rule(
             tag_list_rule, 'delog_tag_list', self.make_tag_list)
         self.manager.add_action('dx_post_update', self.load_tags)
-        self.i18n = I18n(
-            Path.format_url(self.workspace, 'locale'), conf('local.locale'))
 
     def load_tags(self, *args, **kwargs):
         post = kwargs.get('post')

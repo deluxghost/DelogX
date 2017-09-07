@@ -53,6 +53,7 @@ def init(init_args):
         locale = input('> ')
     copytree(defaults, cwd)
     print('Setting language', locale)
+    #  TODO: Update config entries
     config = Config(os.path.join(cwd, 'config.json'))
     config.let('local.locale', locale)
     config.save()

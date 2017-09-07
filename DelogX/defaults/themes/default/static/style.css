@@ -321,6 +321,7 @@ article .post-content p {
 
 article .post-tags {
     margin-top: 8px;
+    line-height: 80%;
 }
 
 article .post-tags a,
@@ -336,9 +337,21 @@ article .post-tags a:visited {
     transition: background-color .2s;
 }
 
+article .post-tags a:before {
+    content: "#";
+}
+
 article .post-tags a:hover {
-    background-color: #b8b8b8;
+    background-color: #ccc;
     color: #52617a;
+}
+
+article.article-post .read-more {
+    display: none;
+}
+
+article.article-list .post-more {
+    display: none;
 }
 
 article button,
@@ -487,6 +500,11 @@ article code {
 .prev-page a:hover {
     color: #000;
     text-decoration: none;
+}
+
+.next-page,
+.prev-page {
+    margin: 24px 0 18px 0;
 }
 
 .next-page {

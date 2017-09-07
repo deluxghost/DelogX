@@ -3,7 +3,7 @@
 {%- if posts %}
 {%- for post in posts %}
 {%- if post %}
-<article>
+<article class="article-list">
     <h1 class="post-title"><a href="{{ post.cooked_url }}">{{ post.title.strip('\n') }}</a></h1>
     <span class="post-time">{{ post.cooked_time }}</span>
     <div class="post-content">
