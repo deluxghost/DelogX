@@ -115,7 +115,7 @@ E-mail: <email@example.com>
 
 The syntax of images is similar to links.
 
-![Flask](http://flask.pocoo.org/static/logo.png "a picture")
+![Python](https://www.python.org/static/img/python-logo-large.png "a picture")
 
 ## Horizontal Lines
 

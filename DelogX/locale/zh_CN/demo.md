@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 图片与链接的语法非常接近。
 
-![Flask](http://flask.pocoo.org/static/logo.png "一张图片")
+![Python](https://www.python.org/static/img/python-logo-large.png "一张图片")
 
 ## 水平线 Horizontal Lines
 

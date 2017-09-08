@@ -43,7 +43,7 @@ DelogX 支持大多数标准 Markdown 语法（异同见 [python-markdown 文档
 
 本文附有一份非常精简的“Markdown 快速入门”。
 
-[python-markdown 文档]: http://pythonhosted.org/Markdown/#differences
+[python-markdown 文档]: https://pythonhosted.org/Markdown/#differences
 
 ### 代码高亮
 

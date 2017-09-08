@@ -43,7 +43,7 @@ DelogX support most of standard Markdown syntax (difference see [python-markdown
 
 You can find a very simple "Markdown Getting Started" in this post.
 
-[python-markdown documentation]: http://pythonhosted.org/Markdown/#differences
+[python-markdown documentation]: https://pythonhosted.org/Markdown/#differences
 
 ### Code Highlighting
 
