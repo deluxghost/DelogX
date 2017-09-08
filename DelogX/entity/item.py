@@ -20,20 +20,22 @@ class Item(object):
         filename (str): Name of the item file.
         path (str): Absolute path of the item file.
         hidden (bool): Whether this item is hidden.
+        markdown (str): Markdown content of this item.
         content (str): Parsed content of this item.
         url (str): Clean URL of this item.
         cooked_url (str): Encoded URL of this item.
         title (str): Title of this item.
-        title_mode (int): Type of title, 0 is nil, 1 is Atx, 2 is Setext.
+        title_line (int): Start line number of content.
         plugin_manager (PluginManager): Plugin manager of DelogX.
     '''
     filename = None
     path = None
     hidden = False
+    markdown = None
     content = None
     url = None
     title = None
-    title_mode = 0  # TODO: magic value
+    title_line = 0
     plugin_manager = None
 
     def __init__(self, blog, filename, path):
@@ -88,25 +90,22 @@ class Item(object):
         setext_match = setext_re.match(line2)
         if atx_match and atx_match.group(1):
             self.title = atx_match.group(1)
-            self.title_mode = 1
+            self.title_line = first_line + 1
         elif setext_match and line1.strip():
             self.title = line1
-            self.title_mode = 2
+            self.title_line = first_line + 2
         else:
             self.title = self.url
-            self.title_mode = 0
+            self.title_line = 0
 
     def load_content(self):
         '''Load and parse the content of this item.'''
         lines = Path.read_file(self.path)
         if lines is None:
-            self.content = None
-        if self.title_mode == 1:
-            lines = lines[1:]
-        elif self.title_mode == 2:
-            lines = lines[2:]
-        self.content = ''.join(lines)
-        self.content = Markdown.markdown(self.content, self.blog.markdown_ext)
+            self.markdown = None
+        lines = lines[self.title_line:]
+        self.markdown = ''.join(lines)
+        self.content = Markdown.markdown(self.markdown, self.blog.markdown_ext)
 
 
 class Post(Item):
@@ -151,6 +150,6 @@ class Page(Item):
         match = sort_re.match(os.path.splitext(self.url)[1])
         if match:
             self.url = os.path.splitext(self.url)[0]
-            if self.title_mode == 0:
+            if self.title_line == 0:
                 self.title = self.url
             self.sort = int(match.group()[1:])
