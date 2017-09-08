@@ -180,7 +180,8 @@ def main():
         dest='apache', help='deploy on Apache 2 (mod_wsgi)',
         action='store_true')
     deploy_parser.add_argument(
-        '--wsgi', dest='wsgi', help='deploy in a WSGI container',
+        '--wsgi', '--uwsgi',
+        dest='wsgi', help='deploy in a WSGI container',
         action='store_true')
     deploy_parser.add_argument(
         '--nginx', dest='nginx', help='deploy behind Nginx proxy',
