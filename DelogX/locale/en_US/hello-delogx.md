@@ -56,7 +56,7 @@ print("Hello Python3!")
 ```
 ````
 
-DelogX choose the GitHub color scheme as default, you can also customize your languages and color schemes at the highlight.js website.
+DelogX choose the Atelier Cave Light color scheme as default, you can also customize your languages and color schemes at the highlight.js website.
 
 [highlight.js]: https://highlightjs.org/
 

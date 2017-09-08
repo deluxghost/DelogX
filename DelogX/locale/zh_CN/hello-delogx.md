@@ -56,7 +56,7 @@ print("Hello Python3!")
 ```
 ````
 
-DelogX 默认提供了 GitHub 色彩方案，您也可以按照 highlight.js 的文档来自定义高亮支持语言和色彩方案。
+DelogX 默认提供了 Atelier Cave Light 色彩方案，您也可以按照 highlight.js 的文档来自定义高亮支持语言和色彩方案。
 
 [highlight.js]: https://highlightjs.org/
 
