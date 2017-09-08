@@ -6,6 +6,7 @@ from flask import request
 from werkzeug.contrib.atom import AtomFeed
 
 from DelogX.utils.config import Config
+from DelogX.utils.parser import Markdown
 from DelogX.utils.path import Path
 from DelogX.utils.plugin import Plugin
 
@@ -56,9 +57,10 @@ class DelogFeed(Plugin):
                 ext_url = ext_url[:-1]
             ext_url = ext_url + post.cooked_url
             update_time = datetime.datetime.fromtimestamp(post.time)
+            content = Markdown.markdown(post.markdown, self.blog.markdown_ext)
             feed.add(
                 title=post.title, title_type='text',
-                content=post.content, content_type='html',
+                content=content, content_type='html',
                 url=ext_url, author=site_name,
                 updated=update_time, published=update_time)
         return feed.get_response()
