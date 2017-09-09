@@ -8,3 +8,4 @@ DelogX.egg-info/
 DelogX-*/
 __pycache__/
 debug.log
+.coverage
