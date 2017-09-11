@@ -38,14 +38,18 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Operating System :: OS Independent',
+        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+        'Framework :: Flask',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
-        'Framework :: Flask',
-        'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Natural Language :: English',
         'Natural Language :: Chinese (Simplified)',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application'
     ],
     install_requires=[
