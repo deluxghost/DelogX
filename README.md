@@ -1,6 +1,6 @@
 # DelogX
 
-[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/deluxghost/DelogX/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-LGPL%20v3-blue.svg?style=flat-square)](https://raw.githubusercontent.com/deluxghost/DelogX/master/LICENSE)
 [![Travis](https://img.shields.io/travis/deluxghost/DelogX.svg?style=flat-square)](https://travis-ci.org/deluxghost/DelogX/)
 [![Coveralls](https://img.shields.io/coveralls/deluxghost/DelogX.svg?style=flat-square)](https://coveralls.io/github/deluxghost/DelogX)
 [![PyPI](https://img.shields.io/pypi/pyversions/DelogX.svg?style=flat-square)](https://pypi.python.org/pypi/DelogX)

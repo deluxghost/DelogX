@@ -42,6 +42,7 @@ setup(
         'Intended Audience :: System Administrators',
         'Framework :: Flask',
         'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Natural Language :: English',
         'Natural Language :: Chinese (Simplified)',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
@@ -64,7 +65,7 @@ setup(
     author_email='deluxghost@gmail.com',
     description='Yet another Markdown based blog',
     long_description=DESCRIPTION,
-    license='Apache License 2.0',
+    license='LGPL v3',
     keywords='flask markdown blog framework',
     url='http://delogx.deluxghost.me/'
 )
