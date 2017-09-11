@@ -15,4 +15,6 @@ script:
 after_success:
 - coveralls
 notifications:
-  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+  webhooks:
+  - https://fathomless-fjord-24024.herokuapp.com/notify
+  - https://app.fossa.io/hooks/travisci
