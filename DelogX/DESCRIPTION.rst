@@ -1,4 +1,4 @@
-DelogX is a lite, tiny, micro and dynamic Markdown based blog framework, written in Python and powered by Flask.
+DelogX is a lite, tiny, micro and dynamic Markdown based blogging platform, written in Python and powered by Flask.
 
 Features
 --------

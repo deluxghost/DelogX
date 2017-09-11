@@ -7,7 +7,7 @@
 [![PyPI](https://img.shields.io/pypi/v/DelogX.svg?style=flat-square)](https://pypi.python.org/pypi/DelogX)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdeluxghost%2FDelogX.svg?type=small)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fdeluxghost%2FDelogX?ref=badge_small)
 
-DelogX is a lite, tiny, micro and dynamic Markdown based blog framework, written in Python and powered by Flask.
+DelogX is a lite, tiny, micro and dynamic Markdown based blogging platform, written in Python and powered by Flask.
 
 ## Features
 

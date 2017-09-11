@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 '''The class, definition and interface of DelogX.'''
+import codecs
 import os
 import time
 
-from flask import render_template, abort, send_from_directory
+from flask import render_template, make_response, abort, send_from_directory
 from watchdog.observers import Observer
 from watchdog.observers.polling import PollingObserver
 
@@ -49,6 +50,10 @@ class DelogX(object):
         module_path = os.path.dirname(os.path.realpath(__file__))
         runtime.let('path.app', app_path)
         runtime.let('path.module', module_path)
+        ver_file = os.path.join(module_path, 'VERSION')
+        with codecs.open(ver_file, encoding='utf-8') as f:
+            version = ''.join(f.readlines()).strip()
+        runtime.let('blog.version', version)
         self.config = config
         self.runtime = runtime
         self.markdown_ext = list()
@@ -207,7 +212,7 @@ class DelogX(object):
         self.header = self.plugin_manager.do_filter('dx_header', header)
 
     def get_render(self, template, **context):
-        '''Return rendered HTML content.
+        '''Return rendered HTML content response.
 
         Args:
 
@@ -216,7 +221,7 @@ class DelogX(object):
 
         Returns:
 
-            str: rendered HTML.
+            Response: rendered HTML response.
 
         Contexts:
 
@@ -228,6 +233,7 @@ class DelogX(object):
             _js: JS list of site.
         '''
         conf = self.default_conf
+        runtime = self.runtime
         render = render_template(
             template,
             app=self,
@@ -238,7 +244,10 @@ class DelogX(object):
             _js=self.get_static(conf('static.js')),
             **context)
         self.plugin_manager.do_action('dx_render')
-        return self.plugin_manager.do_filter('dx_render', render)
+        render = self.plugin_manager.do_filter('dx_render', render)
+        resp = make_response(render)
+        resp.headers['DelogX-Version'] = runtime.get('blog.version')
+        return resp
 
     def get_page(self, page_id):
         '''Return cooked Page object by id.
