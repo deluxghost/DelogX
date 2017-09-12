@@ -9,7 +9,7 @@ Features
 -  Manage articles in one directory.
 -  No database and admin panel, everything is file.
 -  Compatible with Windows, macOS, Linux and even WSL or Android.
--  Configure everything, including localization.
+-  Everything is configurable.
 -  Customize your blog with plugins and themes.
 -  Deploy on Apache, Nginx, standalone WSGI containers or just built-in server.
 
