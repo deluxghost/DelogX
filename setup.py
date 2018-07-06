@@ -54,8 +54,8 @@ setup(
     ],
     install_requires=[
         'Flask>=0.11',
-        'watchdog',
-        'markdown'
+        'watchdog>=0.8.2',
+        'markdown>=2.3'
     ],
     package_data={
         'DelogX': find_package_data()
