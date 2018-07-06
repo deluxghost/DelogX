@@ -29,7 +29,7 @@ Install DelogX with pip:
 pip3 install DelogX
 ```
 
-You may need root permissions:
+You may be required to have root permission:
 
 ```shell
 sudo pip3 install DelogX
@@ -44,22 +44,22 @@ mkdir my_blog
 cd my_blog
 ```
 
-Then run command:
+Then execute this command:
 
 ```shell
 delogx init
 ```
 
-and follow the instructions to initialize.
+and follow the instructions finish the initialization.
 
-When the process is complete, run:
+After the process is complete, run this:
 
 ```shell
 python3 debug.py
 ```
 
-and visit "http://127.0.0.1:8000" to test if everything is ok.
+and visit "http://127.0.0.1:8000" in your browser to test if everything is ok.
 
-If everything is ok, you can read the [documentation] to learn about how to config and how to add posts.
+If everything is ok, you can read the [documentation] to learn about how to configure and how to add posts.
 
 [documentation]: https://github.com/deluxghost/DelogX/wiki
