@@ -28,9 +28,13 @@ class DelogReadMore(Plugin):
         post_url = self.blog.runtime.get('url_prefix.post')
         post_url = Path.format_url(post_url, Path.urlencode(post.url))
         content = '''{0}
-        <div class="read-more"><a href="{1}">{2}</a></div>
-        <div class="post-more">{3}</div>
+        <div class="{1}"><a href="{2}">{3}</a></div>
+        <div class="post-more">{4}</div>
         '''
+        more_class = ['read-more']
+        if not more:
+            more_class.append('no-more-content')
+        more_class = ' '.join(more_class)
         content = content.format(
-            summary, post_url, self.i18n.get('Read More'), more)
+            summary, more_class, post_url, self.i18n.get('Read More'), more)
         post.content = content
