@@ -31,9 +31,12 @@ class Markdown(object):
             ext_list.extend(exts)
         elif exts:
             ext_list.append(exts)
-        return markdown.markdown(
+        output = markdown.markdown(
             text,
             output_format='html5',
             tab_length=4,
             extensions=ext_list
         )
+        if not output:
+            output = '<p></p>'
+        return output
