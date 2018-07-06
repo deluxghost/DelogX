@@ -145,7 +145,10 @@ class DelogXBundle(Bundle):
 
             list of Item: List of these items.
         '''
-        return list(self.bundle_list.values())
+        item_list = [
+            item for item in self.bundle_list.values() if not item.hidden
+        ]
+        return item_list
 
 
 class PostBundle(DelogXBundle):
