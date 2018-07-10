@@ -10,7 +10,6 @@ import os
 from collections import OrderedDict
 
 from DelogX.entity.item import Post, Page
-from DelogX.utils.compat import Compat
 from DelogX.utils.path import Path
 
 
@@ -278,4 +277,6 @@ class PageBundle(DelogXBundle):
     def sort(self):
         '''Sort the list of the page bundle by customize order.'''
         self.bundle_list = OrderedDict(sorted(
-            self.bundle_list.items(), key=Compat.cmp_to_key()))
+            self.bundle_list.items(),
+            key=lambda x: float('inf') if x[1].sort is None else x[1].sort
+        ))
