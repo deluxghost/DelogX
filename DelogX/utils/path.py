@@ -5,6 +5,7 @@ Utils and functions about path.
 '''
 import codecs
 import os
+import urllib.parse
 
 
 class Path(object):
@@ -36,7 +37,6 @@ class Path(object):
 
             str: Encoded URL.
         '''
-        import urllib.parse
         return urllib.parse.quote(url)
 
     @classmethod
@@ -51,7 +51,6 @@ class Path(object):
 
             str: Decoded URL.
         '''
-        import urllib.parse
         return urllib.parse.unquote(url)
 
     @classmethod

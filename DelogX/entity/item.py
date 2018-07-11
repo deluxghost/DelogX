@@ -102,7 +102,7 @@ class Item(object):
         '''Load and parse the content of this item.'''
         lines = Path.read_file(self.path)
         if lines is None:
-            self.markdown = None
+            lines = list()
         lines = lines[self.title_line:]
         self.markdown = ''.join(lines)
         self.content = Markdown.markdown(self.markdown, self.blog.markdown_ext)
