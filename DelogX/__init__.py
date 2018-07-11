@@ -98,7 +98,6 @@ class DelogX(object):
         '''Initialize bundles of posts and pages.'''
         conf = self.default_conf
         runtime = self.runtime
-        app_path = runtime.get('path.app')
         post_dir = runtime.get('directory.post')
         page_dir = runtime.get('directory.page')
         self.post_bundle = PostBundle(self)

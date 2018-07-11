@@ -134,8 +134,7 @@ class DelogXBundle(Bundle):
             return finder[0]
         elif finder_hidden:
             return finder_hidden[0]
-        else:
-            return None
+        return None
 
     def get_list(self):
         '''Return a list of multiple items.
@@ -181,7 +180,7 @@ class PostBundle(DelogXBundle):
 
             bool: Whether the file is updated successfully.
         '''
-        post = Post(self.blog, filename, self.directory)
+        post = Post(self.blog, filename)
         if post.valid():
             self.bundle_list[filename] = post
             self.sort()
@@ -245,10 +244,8 @@ class PostBundle(DelogXBundle):
                     list_size * (number - 1):list_size * number
                 ]
                 return post_list
-            else:
-                return list()
-        else:
-            return super(PostBundle, self).get_list()
+            return list()
+        return super(PostBundle, self).get_list()
 
 
 class PageBundle(DelogXBundle):
@@ -275,7 +272,7 @@ class PageBundle(DelogXBundle):
 
             bool: Whether the file is updated successfully.
         '''
-        page = Page(self.blog, filename, self.directory)
+        page = Page(self.blog, filename)
         if page.valid():
             self.bundle_list[filename] = page
             self.sort()

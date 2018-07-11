@@ -118,6 +118,10 @@ class Post(Item):
     '''
     time = None
 
+    def __init__(self, blog, filename):
+        post_dir = blog.runtime.get('directory.post')
+        super(Post, self).__init__(blog, filename, post_dir)
+
     def update(self):
         '''Load the meta and content of this post.'''
         super(Post, self).update()
@@ -137,6 +141,10 @@ class Page(Item):
         sort (int): Customize sort order of this page.
     '''
     sort = None
+
+    def __init__(self, blog, filename):
+        page_dir = blog.runtime.get('directory.page')
+        super(Page, self).__init__(blog, filename, page_dir)
 
     def update(self):
         '''Load the meta and content of this page.'''
