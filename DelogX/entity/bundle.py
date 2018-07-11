@@ -165,7 +165,7 @@ class PostBundle(DelogXBundle):
 
             blog (DelogX): DelogX object.
         '''
-        self.list_size = blog.defaul_conf('local.list_size')
+        self.list_size = blog.default_conf('local.list_size')
         post_dir = blog.runtime.get('directory.post')
         super(PostBundle, self).__init__(blog, post_dir)
 
