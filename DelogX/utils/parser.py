@@ -27,7 +27,7 @@ class Markdown(object):
             'markdown.extensions.tables',
             'markdown.extensions.fenced_code'
         ]
-        if exts and isinstance(exts, list):
+        if exts and isinstance(exts, (list, set, tuple)):
             ext_list.extend(exts)
         elif exts:
             ext_list.append(exts)

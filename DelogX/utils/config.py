@@ -152,9 +152,8 @@ class Config(object):
             if k not in item:
                 item[k] = OrderedDict()
             return self._let_config(item[k], rest, value)
-        else:
-            item[key] = value
-            return value
+        item[key] = value
+        return value
 
     def _get_config(self, item, key):
         if not isinstance(item, OrderedDict):
@@ -163,13 +162,10 @@ class Config(object):
             k, rest = key.split('.', 1)
             if k not in item:
                 return None
-            else:
-                return self._get_config(item[k], rest)
-        else:
-            if key in item:
-                return item[key]
-            else:
-                return None
+            return self._get_config(item[k], rest)
+        if key in item:
+            return item[key]
+        return None
 
     def _delete_config(self, item, key):
         if not isinstance(item, OrderedDict):
@@ -178,10 +174,7 @@ class Config(object):
             k, rest = key.split('.', 1)
             if k not in item:
                 return None
-            else:
-                return self._delete_config(item[k], rest)
-        else:
-            if key in item:
-                return item.pop(key, None)
-            else:
-                return None
+            return self._delete_config(item[k], rest)
+        if key in item:
+            return item.pop(key, None)
+        return None
