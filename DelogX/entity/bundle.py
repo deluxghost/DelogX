@@ -53,17 +53,17 @@ class DelogXBundle(Bundle):
     '''
     directory = None
 
-    def __init__(self, blog, app_path, directory):
+    def __init__(self, blog, directory):
         '''Initialize a DelogX bundle.
 
         Args:
 
             blog (DelogX): DelogX object.
-            app_path (str): Absolute path of the blog application.
             directory (str): Name of items directory.
         '''
         self.blog = blog
         self.bundle_list = OrderedDict()
+        app_path = blog.runtime.get('path.app')
         self.directory = Path.abs_path(app_path, directory)
         if not os.path.exists(self.directory):
             try:
@@ -155,22 +155,20 @@ class PostBundle(DelogXBundle):
 
     Attributes:
 
-        list_size (int): Count of posts per page .
+        list_size (int): Count of posts per page.
     '''
     list_size = 10
 
-    def __init__(self, blog, app_path, post_dir, list_size=10):
+    def __init__(self, blog):
         '''Initialize a post bundle.
 
         Args:
 
             blog (DelogX): DelogX object.
-            app_path (str): Absolute path of the blog application.
-            post_dir (str): Name of posts directory.
-            list_size (int): Count of posts per page, defaults 10.
         '''
-        self.list_size = list_size
-        super(PostBundle, self).__init__(blog, app_path, post_dir)
+        self.list_size = blog.defaul_conf('local.list_size')
+        post_dir = blog.runtime.get('directory.post')
+        super(PostBundle, self).__init__(blog, post_dir)
 
     def update(self, filename):
         '''Update an post in bundle.
@@ -255,6 +253,16 @@ class PostBundle(DelogXBundle):
 
 class PageBundle(DelogXBundle):
     '''A set of pages.'''
+
+    def __init__(self, blog):
+        '''Initialize a page bundle.
+
+        Args:
+
+            blog (DelogX): DelogX object.
+        '''
+        page_dir = blog.runtime.get('directory.page')
+        super(PageBundle, self).__init__(blog, page_dir)
 
     def update(self, filename):
         '''Update an page in bundle.

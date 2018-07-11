@@ -101,9 +101,8 @@ class DelogX(object):
         app_path = runtime.get('path.app')
         post_dir = runtime.get('directory.post')
         page_dir = runtime.get('directory.page')
-        self.post_bundle = PostBundle(
-            self, app_path, post_dir, conf('local.list_size'))
-        self.page_bundle = PageBundle(self, app_path, page_dir)
+        self.post_bundle = PostBundle(self)
+        self.page_bundle = PageBundle(self)
         post_watch = Watch(self, self.post_bundle, ['*.md'])
         page_watch = Watch(self, self.page_bundle, ['*.md'], is_page=True)
         watch_polling = conf('local.watch_polling')
