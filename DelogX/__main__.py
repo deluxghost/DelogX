@@ -81,8 +81,7 @@ def init(init_args):
         os.makedirs(page_dir)
     page_path = os.path.join(page_dir, 'demo.md')
     print(' Copying {0}'.format(page_path))
-    shutil.copyfile(
-        os.path.join(locale_dir, locale, 'demo.md'), page_path)
+    shutil.copyfile(os.path.join(locale_dir, locale, 'demo.md'), page_path)
     print('''Blog created successfully, edit 'config.json' to configure.''')
 
 
